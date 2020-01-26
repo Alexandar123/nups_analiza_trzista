@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "test_data3")
+@Table(name = "test_data5")
 public class AdvertiseWebNekretnine {
 
 	@Id
@@ -22,6 +22,7 @@ public class AdvertiseWebNekretnine {
 	private Long price;
 	private int areas;
 	private Date ad_published;
+	private Date ad_removed;
 	private String title;
 	private String description;
 	private String address;
@@ -39,13 +40,15 @@ public class AdvertiseWebNekretnine {
 	private Date date_of_inserting;
 	private String type_of_property;
 	private int building_year;
+	private byte[] screenshot;
 
 	public AdvertiseWebNekretnine() {
 	}
 
 	public AdvertiseWebNekretnine(String name, String url, Long price, int areas, Date ad_published, String title,
 			String description, String address, String full_address, String floor, float num_of_rooms, String city,
-			String state, String street, float price_per_m, byte[] image1, byte[] image2, String type_of_ad, int building_yer) {
+			String state, String street, float price_per_m, byte[] image1, byte[] image2, String type_of_ad,
+			int building_yer, byte[] screenshot) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -67,12 +70,93 @@ public class AdvertiseWebNekretnine {
 		this.image2 = image2;
 		this.type_of_ad = type_of_ad;
 		this.building_year = building_yer;
-		
+		this.screenshot = screenshot;
+
+	}
+
+	public AdvertiseWebNekretnine(String name, String url, Long price, int areas, Date ad_published, Date ad_removed, String title,
+			String description, String address, String full_address, String floor, float num_of_rooms, String city,
+			String state, String street, float price_per_m, byte[] image1, byte[] image2, String type_of_ad,
+			int building_yer, byte[] screenshot) {
+		super();
+		this.name = name;
+		this.url = url;
+		this.price = price;
+		this.areas = areas;
+		this.ad_published = ad_published;
+		this.ad_removed = ad_removed;
+		this.title = title;
+		this.description = description;
+		this.address = address;
+		this.full_address = full_address;
+		this.floor = floor;
+		this.num_of_rooms = num_of_rooms;
+		this.city = city;
+		this.state = state;
+		this.street = street;
+		this.price_per_m = price_per_m;
+		this.image1 = image1;
+		this.image2 = image2;
+		this.type_of_ad = type_of_ad;
+		this.building_year = building_yer;
+		this.screenshot = screenshot;
+
+	}
+	public AdvertiseWebNekretnine(Long id, String name, String url, Long price, int areas, Date ad_published,
+			String title, String description, String address, String full_address, String floor, float num_of_rooms,
+			String city, String state, String street, float price_per_m, String type_of_ad, int building_yer) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.url = url;
+		this.price = price;
+		this.areas = areas;
+		this.ad_published = ad_published;
+		this.title = title;
+		this.description = description;
+		this.address = address;
+		this.full_address = full_address;
+		this.floor = floor;
+		this.num_of_rooms = num_of_rooms;
+		this.city = city;
+		this.state = state;
+		this.street = street;
+		this.price_per_m = price_per_m;
+		this.type_of_ad = type_of_ad;
+		this.building_year = building_yer;
+
 	}
 	
+	public AdvertiseWebNekretnine(Long id, String name, String url, Long price, int areas, Date ad_published,
+			String title, String description, String address, String full_address, String floor, float num_of_rooms,
+			String city, String state, String street, float price_per_m, String type_of_ad, String type_of_property, int building_yer) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.url = url;
+		this.price = price;
+		this.areas = areas;
+		this.ad_published = ad_published;
+		this.title = title;
+		this.description = description;
+		this.address = address;
+		this.full_address = full_address;
+		this.floor = floor;
+		this.num_of_rooms = num_of_rooms;
+		this.city = city;
+		this.state = state;
+		this.street = street;
+		this.price_per_m = price_per_m;
+		this.type_of_ad = type_of_ad;
+		this.type_of_property = type_of_property;
+		this.building_year = building_yer;
+
+	}
+
 	public AdvertiseWebNekretnine(String name, String url, Long price, int areas, Date ad_published, String title,
 			String description, String address, String full_address, String floor, float num_of_rooms, String city,
-			String state, String street, float price_per_m, byte[] image1, byte[] image2, String type_of_ad, String type_of_property, int building_yer) {
+			String state, String street, float price_per_m, byte[] image1, byte[] image2, String type_of_ad,
+			String type_of_property, int building_yer) {
 		super();
 		this.name = name;
 		this.url = url;
@@ -137,6 +221,22 @@ public class AdvertiseWebNekretnine {
 
 	public void setFull_address(String full_address) {
 		this.full_address = full_address;
+	}
+
+	public Date getAd_removed() {
+		return ad_removed;
+	}
+
+	public void setAd_removed(Date ad_removed) {
+		this.ad_removed = ad_removed;
+	}
+
+	public int getBuilding_year() {
+		return building_year;
+	}
+
+	public void setBuilding_year(int building_year) {
+		this.building_year = building_year;
 	}
 
 	public Long getId() {
@@ -297,6 +397,14 @@ public class AdvertiseWebNekretnine {
 
 	public void setBuilding_yer(int building_yer) {
 		this.building_year = building_yer;
+	}
+
+	public byte[] getScreenshot() {
+		return screenshot;
+	}
+
+	public void setScreenshot(byte[] screenshot) {
+		this.screenshot = screenshot;
 	}
 
 	@Override

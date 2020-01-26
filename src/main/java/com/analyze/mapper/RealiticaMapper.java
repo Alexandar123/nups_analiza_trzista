@@ -52,7 +52,7 @@ public class RealiticaMapper {
 		System.out.println("***********************");
 		FULL_PATH = BASE + FILE + EXTENSION;
 
-		for (int i = 1; i <= 1; i++) {
+		for (int i = 1; i <= 10; i++) {
 			FILE = prefix + NAME_OF_FILE + DATE + "_";
 			FILE += i;// Number of documents
 
@@ -79,9 +79,9 @@ public class RealiticaMapper {
 		InsertRecordInDatabaseWithJdbcTemplate insert = new InsertRecordInDatabaseWithJdbcTemplate();
 		int br = 0, price2 = 0, areasInt = 0, br1 = 0, br3 = 0, building_yer =0;
 		byte[] image11 = null, image22 = null;
-		String url, title = null, description1 = null,address = null, podrucje = null,addressa, state, city, street,type_of_property;
-		Long priceLong;
-		java.sql.Date date1;
+		String floor = null, url = null, title = null, description1 = null,address = null, podrucje = null,addressa, state = null, city = null, street = null,type_of_property = "apartment";
+		Long priceLong = null;
+		java.sql.Date date1 = null;
 		float num_of_rooms = 0, price_per_m=0;
 
 		// JsonArray groupObject = jsonObject.getAsJsonArray("group");
@@ -141,7 +141,7 @@ public class RealiticaMapper {
 					//*********areas spremna za bazu************//
 						if(description.contains("Površ") || description.contains("m2") || description.contains("Povrsi") || description.contains("useljiv") ) {
 							String[] s = StringUtils.substringsBetween(description, "Površina:", "m2");
-							
+							System.out.println(image1);
 							String replace = s[0].replace(" ", "");
 							replace = replace.replace(".", "");
 							areasInt = Integer.parseInt(replace);
@@ -263,8 +263,8 @@ public class RealiticaMapper {
 					//*********num_of_rooms spremna za bazu************//
 							
 					//*********image1, image2 spremna za bazu************//
-							//image11 = ImageDownloader.saveImage(image1, "image_1_" + 1);
-							//image22 = ImageDownloader.saveImage(image2, "image_2_" + 2);
+							image11 = ImageDownloader.saveImage(image1, "image_1_" + 1);
+							image22 = ImageDownloader.saveImage(image2, "image_2_" + 2);
 					//*********image1, image2 spremna za bazu************//
 							
 					//*********price_per_m spremna za bazu************//
@@ -277,18 +277,18 @@ public class RealiticaMapper {
 							
 					//*********floor spremna za bazu************//
 							if(description.contains("prvom ") || description.contains("prvi sprat ") || description.contains("Opis: 1.0,")) {
-								System.out.println("prvom");
+								floor = "1";
+							}else if(description.contains("Opis: 2.0,")) {
+								String[] floor1= StringUtils.substringsBetween(description, " ", "sprat");
+									floor = "2";
+							}else if(description.contains("treci ") || description.contains("Opis: 3.0,") || description.contains("treci sprat ") || description.contains("treći ") || description.contains("treći sprat")) {
+								floor = "3";
+							}else if(description.contains("cetvrt ") || description.contains("četvrt ") || description.contains("Opis: 4.0,")) {
+								floor = "4";
+							}else {
+								floor = "-1";
 							}
-							if(description.contains("Opis: 2.0,")) {
-								String[] floor= StringUtils.substringsBetween(description, " ", "sprat");
-									System.out.println("Test: " + floor[0]);
-							}
-							if(description.contains("treci ") || description.contains("Opis: 3.0,") || description.contains("treci sprat ") || description.contains("treći ") || description.contains("treći sprat")) {
-								System.out.println("treci");
-							}
-							if(description.contains("cetvrt ") || description.contains("četvrt ") || description.contains("Opis: 4.0,")) {
-								System.out.println("cetvrt");
-							}
+							System.out.println("Sprat: " + floor);
 					//*********floor spremna za bazu************//
 							
 					//*********godina izgradnje spremna za bazu**********//
@@ -307,14 +307,17 @@ public class RealiticaMapper {
 							}
 					//*********type_of_property izgradnje spremna za bazu**********//
 							
+					//*********street izgradnje spremna za bazu**********//
+							street = address;
+					//*********street izgradnje spremna za bazu**********//
 				}
-				
-				//AdvertiseWebNekretnine adv = new AdvertiseWebNekretnine(name, url, priceLong, areasInt,
-				//		date1, title, description, address, address, floor, num_of_rooms, city,
-				//		state, street, price_per_m, image11, image22, type_of_ad, type_of_property, building_yer);
+				System.out.println("TIP: " + building_yer);
+				AdvertiseWebNekretnine adv = new AdvertiseWebNekretnine(name, url, priceLong, areasInt,
+						date1, title, description, address, address, floor, num_of_rooms, city,
+						state, street, price_per_m, image11, image22, type_of_ad, type_of_property, building_yer);
 
-//				ls.add(adv);
-//				insert.saveRecord(adv);
+				ls.add(adv);
+			insert.saveRecord(adv);
 				
 
 			}

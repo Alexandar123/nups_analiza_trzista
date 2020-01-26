@@ -7,11 +7,13 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 
 public class ImageDownloader {
 	public static byte[] saveImage(String url1, String name) {
 		BufferedImage image = null;
+		
 		try {
 
 			URL url = new URL(url1);
