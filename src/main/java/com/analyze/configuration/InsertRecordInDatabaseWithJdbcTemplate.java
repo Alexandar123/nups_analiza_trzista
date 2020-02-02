@@ -47,9 +47,10 @@ public class InsertRecordInDatabaseWithJdbcTemplate implements DatabaseMethodRep
 					" image2, " +
 					" type_of_ad, " +
 					" type_of_property, " +
-					" building_year) " +
+					" building_year, " +
+					" screenshot) " +
 
-					"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	
 	
 
@@ -107,13 +108,13 @@ public class InsertRecordInDatabaseWithJdbcTemplate implements DatabaseMethodRep
 		// define query arguments
 		Object[] params = new Object[] { adv.getName(), adv.getUrl(), adv.getPrice(), adv.getAreas(), adv.getAd_published(), adv.getTitle(), adv.getDescription(),
 				adv.getAddress(), adv.getFull_address(), adv.getFloor(), adv.getNum_of_rooms(), adv.getCity(), adv.getState(),
-				adv.getStreet(), adv.getPrice_per_m(), adv.getImage1(), adv.getImage2(), adv.getType_of_ad(), adv.getDate_of_inserting(), adv.getType_of_property(), adv.getBuilding_yer()
+				adv.getStreet(), adv.getPrice_per_m(), adv.getImage1(), adv.getImage2(), adv.getType_of_ad(), adv.getType_of_property(), adv.getBuilding_yer()
 				,adv.getScreenshot()};
 
 		// define SQL types of the arguments
 		int[] types = new int[] { Types.VARCHAR, Types.VARCHAR, Types.INTEGER, Types.INTEGER, Types.DATE, Types.VARCHAR,
 				Types.VARCHAR, Types.VARCHAR,Types.VARCHAR,Types.VARCHAR, Types.DECIMAL, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR,
-				Types.DECIMAL, Types.BLOB, Types.BLOB, Types.VARCHAR, Types.DATE, Types.VARCHAR, Types.INTEGER, Types.BLOB };
+				Types.DECIMAL, Types.BLOB, Types.BLOB, Types.VARCHAR, Types.VARCHAR, Types.INTEGER, Types.BLOB };
 
 		// execute insert query to insert the data
 		// return number of row / rows processed by the executed query

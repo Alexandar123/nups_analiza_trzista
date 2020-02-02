@@ -76,7 +76,7 @@ public class AdvertiseWebNekretnine {
 
 	public AdvertiseWebNekretnine(String name, String url, Long price, int areas, Date ad_published, Date ad_removed, String title,
 			String description, String address, String full_address, String floor, float num_of_rooms, String city,
-			String state, String street, float price_per_m, byte[] image1, byte[] image2, String type_of_ad,
+			String state, String street, float price_per_m, byte[] image1, byte[] image2, String type_of_ad, String type_of_property,
 			int building_yer, byte[] screenshot) {
 		super();
 		this.name = name;
@@ -98,6 +98,35 @@ public class AdvertiseWebNekretnine {
 		this.image1 = image1;
 		this.image2 = image2;
 		this.type_of_ad = type_of_ad;
+		this.type_of_property = type_of_property;
+		this.building_year = building_yer;
+		this.screenshot = screenshot;
+
+	}
+	public AdvertiseWebNekretnine(String name, String url, Long price, int areas, Date ad_published, String title,
+			String description, String address, String full_address, String floor, float num_of_rooms, String city,
+			String state, String street, float price_per_m, byte[] image1, byte[] image2, String type_of_ad, String type_of_property,
+			int building_yer, byte[] screenshot) {
+		super();
+		this.name = name;
+		this.url = url;
+		this.price = price;
+		this.areas = areas;
+		this.ad_published = ad_published;
+		this.title = title;
+		this.description = description;
+		this.address = address;
+		this.full_address = full_address;
+		this.floor = floor;
+		this.num_of_rooms = num_of_rooms;
+		this.city = city;
+		this.state = state;
+		this.street = street;
+		this.price_per_m = price_per_m;
+		this.image1 = image1;
+		this.image2 = image2;
+		this.type_of_ad = type_of_ad;
+		this.type_of_property = type_of_property;
 		this.building_year = building_yer;
 		this.screenshot = screenshot;
 

@@ -23,28 +23,46 @@ public class AddScreenShotToAdController {
 	public static void main(String[] args) throws IOException {
 
 		List<AdvertiseWebNekretnine> listOfAd = InsertRecordInDatabaseWithJdbcTemplate.getData("test_data5");
-		
+
 		insertScreenShotForAd(listOfAd);
-		//checkAndUpdateIfAdExist();
+		// checkAndUpdateIfAdExist();
 	}
 
 	public static void insertScreenShotForAd(List<AdvertiseWebNekretnine> listOfAd) throws IOException {
 		WebPageScreenShotTaker screenShot = new WebPageScreenShotTaker();
 		byte[] bImg = null;
 		int br = 0;
-		
-		for (int i = 5108; i < listOfAd.size(); i++) {
+
+		for (int i = 12634; i < listOfAd.size(); i++) {
 			if (checkIfAdExist(listOfAd.get(i).getUrl())) {
 				bImg = screenShot.screenShot(listOfAd.get(i).getUrl());
-				InsertRecordInDatabaseWithJdbcTemplate.updateData(listOfAd.get(i).getId(), "test_data5", "screenshot", bImg);
+				InsertRecordInDatabaseWithJdbcTemplate.updateData(listOfAd.get(i).getId(), "test_data5", "screenshot",
+						bImg);
 				br++;
 				System.out.println(listOfAd.get(i).getUrl());
-			}else {
+			} else {
 				br++;
 			}
 			System.out.println("Broj oglasa: " + i);
-System.out.println("Oglasi koji su istekli: " + br);
+			System.out.println("Oglasi koji su istekli: " + br);
 		}
+	}
+
+	public static byte[] insertScreenShotForAdWithUrl(String url) throws IOException {
+		WebPageScreenShotTaker screenShot = new WebPageScreenShotTaker();
+		byte[] bImg = null;
+		int br = 0;
+
+		if (checkIfAdExist(url)) {
+			bImg = screenShot.screenShot(url);
+			br++;
+			System.out.println(url);
+			return bImg;
+		} else {
+			br++;
+		}
+		System.out.println("Making screenshot: " + br);
+		return null;
 	}
 
 	public static boolean checkIfAdExist(String url) throws IOException {

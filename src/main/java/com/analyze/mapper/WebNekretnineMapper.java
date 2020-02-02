@@ -24,7 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class WebNekretnineMapper {
 
 	public static String prefix = "";// PREFIX FOR CITE
-	public static String DATE = "10_12_2019"; // DATE OF DOWNLOADING DATA
+	public static String DATE = "1_1_2020"; // DATE OF DOWNLOADING DATA
 	public static String NAME_OF_FILE = "webnekretnine_";
 	public static String DIRECTORY = "webnekretnine_10_12_2019\\";
 	public static int NUM_OF_FILE = 20;

@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.nio.file.Files;
 
 public class ImageDownloader {
 	public static byte[] saveImage(String url1, String name) {
