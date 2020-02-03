@@ -32,9 +32,9 @@ public interface OglasiRepository extends CrudRepository<AdvertiseWebNekretnine,
 	@Query(value = "SELECT DISTINCT city FROM test_data5 WHERE LOWER(city) LIKE LOWER(?1)", nativeQuery = true)
 	List<String> getAllCitiesByCountry(String country);
 	
-	@Query(value = "SELECT * FROM test_data5 WHERE  UPPER(full_address) LIKE UPPER(?1) AND type_of_property = ?2 AND type_of_ad = ?3 AND ad_published BETWEEN ?4 AND ?5 AND areas = ?6 AND LOWER(city) LIKE LOWER(?7) AND UPPER(state) LIKE UPPER(?8)", nativeQuery = true)
+	@Query(value = "SELECT * FROM test_data5 WHERE  UPPER(full_address) LIKE UPPER(?1) AND type_of_property = ?2 AND type_of_ad = ?3 AND ad_published BETWEEN ?4 AND ?5 AND areas BETWEEN ?6 AND ?7 AND LOWER(city) LIKE LOWER(?8) AND UPPER(state) LIKE UPPER(?9)", nativeQuery = true)
 	List<AdvertiseWebNekretnine> getAllAdByAllParamsForMap(String address, String type_of_property,String type_of_ad, Date from, Date to,
-			int areas,String city, String state, int radius);
+			int areasMin, int areasMax,String city, String state);
 	
 	@Query(value = "SELECT * FROM test_data5 WHERE  UPPER(full_address) LIKE UPPER(?1) AND type_of_property = ?2 AND type_of_ad = ?3 AND ad_published BETWEEN ?4 AND ?5 AND LOWER(city) LIKE LOWER(?6) AND UPPER(state) LIKE UPPER(?7)", nativeQuery = true)
 	List<AdvertiseWebNekretnine> getAllAdByAllParamsForMapNoAreas(String address, String type_of_property,String type_of_ad, Date from, Date to, String city, String state, int radius);
