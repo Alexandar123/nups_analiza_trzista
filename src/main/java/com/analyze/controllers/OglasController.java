@@ -61,31 +61,6 @@ public class OglasController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	//****************DAJ MI SVE OGLASE ZA LISTU ULICA ZA GENERISANJE MAPE*************
-	@Produces({ MediaType.APPLICATION_JSON })
-	@RequestMapping(value = "/city/{state}/{city}", method = RequestMethod.GET)
-	public List<AdvertiseWebNekretnine> getAllAdsByStreet(@PathVariable("state") String state,
-			@PathVariable("city") String city, @PathVariable("street") String[] street) {
-		List<AdvertiseWebNekretnine> collectAll = new ArrayList<AdvertiseWebNekretnine>();
-		for(int i = 0; i < street.length; i++) {
-			List<AdvertiseWebNekretnine> adv = oglasRepo.getAllAdsByStreet(state, city,street[i]);
-			collectAll.addAll(adv);
-		}
-		return collectAll;
-	}
-	//****************DAJ MI SVE OGLASE ZA LISTU ULICA ZA GENERISANJE MAPE*************
-	
-	
-	
-	
-	
-	
-	
 	@Produces({ MediaType.APPLICATION_JSON })
 	@RequestMapping(value = "/city/{state}/{city}", method = RequestMethod.GET)
 	public Iterable<AdvertiseWebNekretnine> getAllAdByCountryAndCity(@PathVariable("state") String state,
