@@ -41,7 +41,32 @@ public class AdvertiseWebNekretnine {
 	private String type_of_property;
 	private int building_year;
 	private byte[] screenshot;
+	
+	public AdvertiseWebNekretnine(Long id, String name, String url, Long price, int areas, Date ad_published,
+			String title, String description, String address, String full_address, String floor, float num_of_rooms,
+			String city, String state, String street, float price_per_m, String type_of_ad, String type_of_property, int building_yer) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.url = url;
+		this.price = price;
+		this.areas = areas;
+		this.ad_published = ad_published;
+		this.title = title;
+		this.description = description;
+		this.address = address;
+		this.full_address = full_address;
+		this.floor = floor;
+		this.num_of_rooms = num_of_rooms;
+		this.city = city;
+		this.state = state;
+		this.street = street;
+		this.price_per_m = price_per_m;
+		this.type_of_ad = type_of_ad;
+		this.type_of_property = type_of_property;
+		this.building_year = building_yer;
 
+	}
 	public AdvertiseWebNekretnine() {
 	}
 
@@ -156,31 +181,7 @@ public class AdvertiseWebNekretnine {
 
 	}
 	
-	public AdvertiseWebNekretnine(Long id, String name, String url, Long price, int areas, Date ad_published,
-			String title, String description, String address, String full_address, String floor, float num_of_rooms,
-			String city, String state, String street, float price_per_m, String type_of_ad, String type_of_property, int building_yer) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.url = url;
-		this.price = price;
-		this.areas = areas;
-		this.ad_published = ad_published;
-		this.title = title;
-		this.description = description;
-		this.address = address;
-		this.full_address = full_address;
-		this.floor = floor;
-		this.num_of_rooms = num_of_rooms;
-		this.city = city;
-		this.state = state;
-		this.street = street;
-		this.price_per_m = price_per_m;
-		this.type_of_ad = type_of_ad;
-		this.type_of_property = type_of_property;
-		this.building_year = building_yer;
-
-	}
+	
 
 	public AdvertiseWebNekretnine(String name, String url, Long price, int areas, Date ad_published, String title,
 			String description, String address, String full_address, String floor, float num_of_rooms, String city,

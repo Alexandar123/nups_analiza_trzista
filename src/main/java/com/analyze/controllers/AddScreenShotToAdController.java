@@ -32,8 +32,7 @@ public class AddScreenShotToAdController {
 		WebPageScreenShotTaker screenShot = new WebPageScreenShotTaker();
 		byte[] bImg = null;
 		int br = 0;
-
-		for (int i = 14049; i < listOfAd.size(); i++) {
+		for (int i = 16599; i < listOfAd.size(); i++) {
 			if (checkIfAdExist(listOfAd.get(i).getUrl())) {
 				bImg = screenShot.screenShot(listOfAd.get(i).getUrl());
 				InsertRecordInDatabaseWithJdbcTemplate.updateData(listOfAd.get(i).getId(), "test_data5", "screenshot",

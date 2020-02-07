@@ -1,12 +1,14 @@
 package com.analyze.configuration;
 
 
+import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
 import java.util.Optional;
 
 import javax.sql.DataSource;
 
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
@@ -126,7 +128,7 @@ public class InsertRecordInDatabaseWithJdbcTemplate implements DatabaseMethodRep
 	public static DriverManagerDataSource getDataSource() {
 
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-
+		
 		dataSource.setDriverClassName(driverClassName);
 
 		dataSource.setUrl(url);
@@ -134,10 +136,10 @@ public class InsertRecordInDatabaseWithJdbcTemplate implements DatabaseMethodRep
 		dataSource.setUsername(dbUsername);
 
 		dataSource.setPassword(dbPassword);
-
+		
 		return dataSource;
 	}
-
+	
 	@Override
 	public <S extends AdvertiseWebNekretnine> S save(S entity) {
 		// TODO Auto-generated method stub

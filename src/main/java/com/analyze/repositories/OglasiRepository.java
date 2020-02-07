@@ -17,6 +17,9 @@ public interface OglasiRepository extends CrudRepository<AdvertiseWebNekretnine,
 	@Query(value = "SELECT count(*) FROM test_data5", nativeQuery = true)
 	int getNumberOfOglasa();
 	
+	@Query(value = "SELECT * FROM test_data5 WHERE UPPER(state) LIKE UPPER(?1) AND LOWER(city) LIKE LOWER(?2) AND LOWER(street) LIKE LOWER('%?3%')  ORDER BY date_of_inserting", nativeQuery = true)
+	List<AdvertiseWebNekretnine> getAllAdsByStreet(String state, String city,String street);
+	
 	@Query(value = "SELECT * FROM test_data5 WHERE UPPER(state) LIKE UPPER(?1) AND LOWER(city) LIKE LOWER(?2) ORDER BY date_of_inserting", nativeQuery = true)
 	Iterable<AdvertiseWebNekretnine> getAllAdByStateAndCity(String state, String city);
 	
@@ -37,7 +40,7 @@ public interface OglasiRepository extends CrudRepository<AdvertiseWebNekretnine,
 			int areasMin, int areasMax,String city, String state);
 	
 	@Query(value = "SELECT * FROM test_data5 WHERE  UPPER(full_address) LIKE UPPER(?1) AND type_of_property = ?2 AND type_of_ad = ?3 AND ad_published BETWEEN ?4 AND ?5 AND LOWER(city) LIKE LOWER(?6) AND UPPER(state) LIKE UPPER(?7)", nativeQuery = true)
-	List<AdvertiseWebNekretnine> getAllAdByAllParamsForMapNoAreas(String address, String type_of_property,String type_of_ad, Date from, Date to, String city, String state, int radius);
+	List<AdvertiseWebNekretnine> getAllAdByAllParamsForMapNoAreas(String address, String type_of_property,String type_of_ad, Date from, Date to, String city, String state);
 	
 	@Query(value = "SELECT * FROM test_data5 WHERE id_ad=?1", nativeQuery = true)
 	AdvertiseWebNekretnine getAdById(int id);
