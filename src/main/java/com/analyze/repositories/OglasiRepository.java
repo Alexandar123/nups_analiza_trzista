@@ -13,8 +13,10 @@ import com.analyze.model.AdvertiseWebNekretnine;
 
 @Repository
 public interface OglasiRepository extends CrudRepository<AdvertiseWebNekretnine, Long>{
+	@Query(value = "SELECT * FROM test_data5 LIMIT 50 ", nativeQuery = true)
+	List<AdvertiseWebNekretnine> getLimitAd();
 	
-	@Query(value = "SELECT count(*) FROM test_data5", nativeQuery = true)
+	@Query(value = "SELECT count(*) FROM test_data5 ", nativeQuery = true)
 	int getNumberOfOglasa();
 	
 	@Query(value = "SELECT * FROM test_data5 WHERE UPPER(state) LIKE UPPER(?1) AND LOWER(city) LIKE LOWER(?2) AND LOWER(street) LIKE LOWER('%?3%')  ORDER BY date_of_inserting", nativeQuery = true)

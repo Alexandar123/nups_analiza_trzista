@@ -41,10 +41,13 @@ public class AdvertiseWebNekretnine {
 	private String type_of_property;
 	private int building_year;
 	private byte[] screenshot;
-	
+	private double lon;
+	private double lat;
+
 	public AdvertiseWebNekretnine(Long id, String name, String url, Long price, int areas, Date ad_published,
 			String title, String description, String address, String full_address, String floor, float num_of_rooms,
-			String city, String state, String street, float price_per_m, String type_of_ad, String type_of_property, int building_yer) {
+			String city, String state, String street, float price_per_m, String type_of_ad, String type_of_property,
+			int building_yer) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -65,8 +68,8 @@ public class AdvertiseWebNekretnine {
 		this.type_of_ad = type_of_ad;
 		this.type_of_property = type_of_property;
 		this.building_year = building_yer;
-
 	}
+
 	public AdvertiseWebNekretnine() {
 	}
 
@@ -99,10 +102,10 @@ public class AdvertiseWebNekretnine {
 
 	}
 
-	public AdvertiseWebNekretnine(String name, String url, Long price, int areas, Date ad_published, Date ad_removed, String title,
-			String description, String address, String full_address, String floor, float num_of_rooms, String city,
-			String state, String street, float price_per_m, byte[] image1, byte[] image2, String type_of_ad, String type_of_property,
-			int building_yer, byte[] screenshot) {
+	public AdvertiseWebNekretnine(String name, String url, Long price, int areas, Date ad_published, Date ad_removed,
+			String title, String description, String address, String full_address, String floor, float num_of_rooms,
+			String city, String state, String street, float price_per_m, byte[] image1, byte[] image2,
+			String type_of_ad, String type_of_property, int building_yer, byte[] screenshot) {
 		super();
 		this.name = name;
 		this.url = url;
@@ -128,10 +131,11 @@ public class AdvertiseWebNekretnine {
 		this.screenshot = screenshot;
 
 	}
+
 	public AdvertiseWebNekretnine(String name, String url, Long price, int areas, Date ad_published, String title,
 			String description, String address, String full_address, String floor, float num_of_rooms, String city,
-			String state, String street, float price_per_m, byte[] image1, byte[] image2, String type_of_ad, String type_of_property,
-			int building_yer, byte[] screenshot) {
+			String state, String street, float price_per_m, byte[] image1, byte[] image2, String type_of_ad,
+			String type_of_property, int building_yer, byte[] screenshot) {
 		super();
 		this.name = name;
 		this.url = url;
@@ -156,6 +160,7 @@ public class AdvertiseWebNekretnine {
 		this.screenshot = screenshot;
 
 	}
+
 	public AdvertiseWebNekretnine(Long id, String name, String url, Long price, int areas, Date ad_published,
 			String title, String description, String address, String full_address, String floor, float num_of_rooms,
 			String city, String state, String street, float price_per_m, String type_of_ad, int building_yer) {
@@ -180,8 +185,6 @@ public class AdvertiseWebNekretnine {
 		this.building_year = building_yer;
 
 	}
-	
-	
 
 	public AdvertiseWebNekretnine(String name, String url, Long price, int areas, Date ad_published, String title,
 			String description, String address, String full_address, String floor, float num_of_rooms, String city,
@@ -427,6 +430,22 @@ public class AdvertiseWebNekretnine {
 
 	public void setBuilding_yer(int building_yer) {
 		this.building_year = building_yer;
+	}
+
+	public double getLon() {
+		return lon;
+	}
+
+	public void setLon(double lon) {
+		this.lon = lon;
+	}
+
+	public double getLat() {
+		return lat;
+	}
+
+	public void setLat(double lat) {
+		this.lat = lat;
 	}
 
 	public byte[] getScreenshot() {

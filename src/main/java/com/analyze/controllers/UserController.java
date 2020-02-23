@@ -30,6 +30,11 @@ public class UserController {
 	public User getUserById(@PathVariable("id") Long id) {
 		return userRepository.getUserById(id);
 	}
+	
+	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	public Iterable<User> getAllUsers() {
+		return userRepository.findAll();
+	}
 
 	@RequestMapping(value = "/points/{id}", method = RequestMethod.GET)
 	public Long getUserPoints(@PathVariable("id") Long id) {

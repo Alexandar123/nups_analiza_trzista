@@ -72,6 +72,14 @@ public class OglasController {
 
 		return getAll;
 	}
+	
+	@Produces({ MediaType.APPLICATION_JSON })
+	@RequestMapping(value = "/limitAd", method = RequestMethod.GET)
+	public List<AdvertiseWebNekretnine> getLimitAd() {
+		List<AdvertiseWebNekretnine> getAll = oglasRepo.getLimitAd();
+
+		return getAll;
+	}
 
 	@Produces({ MediaType.APPLICATION_JSON })
 	@RequestMapping(value = "/search/{address}/{type_of_property}/{type_of_ad}/{date_from}/{date_to}/{areasmin}/{areasmax}/{city}/{state}", method = RequestMethod.GET)
