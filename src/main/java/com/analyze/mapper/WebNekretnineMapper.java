@@ -256,13 +256,13 @@ public class WebNekretnineMapper {
 				java.util.Date date = sdf1.parse(ad_published);
 				sdf1.applyPattern("YYYY-mm-dd");
 				java.sql.Date date1 = new java.sql.Date(date.getTime());
-
+/*
 				AdvertiseWebNekretnine adv = new AdvertiseWebNekretnine(nameOfAd, urlToTheAd, price2, areasInt, date1,
 						titleOfDetailPage, description, address, fullAddress, floor, num_of_roomsFloat, cite, state,
 						street, price_per_mFloat, image11, image22, type_of_ad);
-
-				ls.add(adv);
-				 insert.saveRecord(adv);
+*/
+				//ls.add(adv);
+				// insert.saveRecord(adv);
 
 				// ************************************************//
 				// Oglasi koji su cisti i spremni za unos
