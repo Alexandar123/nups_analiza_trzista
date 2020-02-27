@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -67,6 +68,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
+	@ResponseStatus(HttpStatus.CREATED)
 	public User insertNewUser(@RequestBody User user) {
 		return userRepository.save(user);
 	}
@@ -76,5 +78,13 @@ public class UserController {
 	public void deleteUser(@PathVariable long id) {
 		log.info("DELETE informacija");
 	    	userRepository.delete(id);    
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public Long logIn(@RequestBody String email) {
+	    	User id_user = userRepository.login(email); 
+	    	if (id_user != null) 
+	    		return id_user.getId();
+	    	else return null;
 	}
 }

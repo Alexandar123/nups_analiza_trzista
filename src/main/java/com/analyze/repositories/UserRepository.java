@@ -5,6 +5,7 @@ import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.analyze.model.User;
@@ -32,4 +33,8 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	@Modifying
 	@Query(value = "DELETE FROM users WHERE id=?1 ", nativeQuery = true)
 	void delete(Long id);
+	
+	@Transactional
+	@Query(value = "SELECT * FROM users WHERE email = ?1 ", nativeQuery = true)
+	User login(String email);
 }
