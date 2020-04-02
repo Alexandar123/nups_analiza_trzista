@@ -16,8 +16,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import com.analyze.configuration.InsertRecordInDatabaseWithJdbcTemplate;
 import com.analyze.controllers.AddScreenShotToAdController;
+import com.analyze.database.InsertRecordInDatabaseWithJdbcTemplate;
 import com.analyze.model.AdvertiseWebNekretnine;
 import com.analyze.validation.ValidationImpl;
 import com.fasterxml.jackson.databind.JsonNode;

@@ -15,7 +15,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import com.analyze.configuration.InsertRecordInDatabaseWithJdbcTemplate;
+import com.analyze.WebPageScreenShotTaker;
+import com.analyze.database.InsertRecordInDatabaseWithJdbcTemplate;
 import com.analyze.model.AdvertiseWebNekretnine;
 import com.analyze.validation.ValidationImpl;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -26,7 +27,7 @@ public class WebNekretnineMapper {
 	public static String prefix = "";// PREFIX FOR CITE
 	public static String DATE = "1_1_2020"; // DATE OF DOWNLOADING DATA
 	public static String NAME_OF_FILE = "webnekretnine_";
-	public static String DIRECTORY = "webnekretnine_10_12_2019\\";
+	public static String DIRECTORY = "webnekretnine_10_12_2019\\10-3-2020\\";
 	public static int NUM_OF_FILE = 20;
 	public static String tipOglasa;
 	private static String type_of_ad = "sell";
@@ -38,31 +39,32 @@ public class WebNekretnineMapper {
 		int imgCounter = 0;
 		float price_per_mFloat = 0;
 		int br = 0;
-		String BASE = "C:\\Users\\agordic\\Desktop\\DataTrziste\\Podaci\\" + DIRECTORY;
+		String BASE = "C:\\Users\\agordic\\Desktop\\DataTrziste\\Podaci\\webnekretnine_10_12_2019\\webnekretnine_latestads_30_3_2020";
 		String EXTENSION = ".json";
 
 		String FILE = "";
 
-		FILE = prefix + NAME_OF_FILE + DATE + "_";
-		FILE += 1;// Number of documents
+		//FILE = prefix + NAME_OF_FILE + DATE + "_";
+		//FILE += 1;// Number of documents
 
 		Instant start = Instant.now();
 
 		System.out.println("***********************");
-		FULL_PATH = BASE + FILE + EXTENSION;
-
-		for (int i = 121; i <= 138; i++) {
-			FILE = prefix + NAME_OF_FILE + DATE + "_";
-			FILE += i;// Number of documents
-
-			FULL_PATH = BASE + FILE + EXTENSION;
+		//FULL_PATH = BASE + FILE + EXTENSION;
+		FULL_PATH = BASE + EXTENSION;
+		//for (int i = 20; i <= 26; i++) {
+			//FILE = prefix + NAME_OF_FILE + DATE + "_";	
+			//FILE="webnekretnine_latestads_30_3_2020";
+			//FILE += i;// Number of documents
+			
+			//FULL_PATH = BASE + FILE + EXTENSION;
 			System.out.println(FULL_PATH);
 			try {
 				readJson(FULL_PATH);
-			} catch (ParseException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
+		//}
 
 		Instant end = Instant.now();
 		System.out.println("Vreme : " + Duration.between(start, end));
@@ -70,13 +72,15 @@ public class WebNekretnineMapper {
 
 	}
 
+
 	private static boolean readJson(String FULL_PATH2) throws ParseException {
 		JsonNode rootNode = null;
 		ObjectMapper objectMapper = new ObjectMapper();
 		ArrayList<AdvertiseWebNekretnine> ls = new ArrayList<AdvertiseWebNekretnine>();
 		InsertRecordInDatabaseWithJdbcTemplate insert = new InsertRecordInDatabaseWithJdbcTemplate();
-		int br = 0, price2 = 0, areasInt = 0, br1 = 0;
-		byte[] image11 = null, image22 = null;
+		int br = 0, areasInt = 0, br1 = 0;
+		Long price2 = 0L;
+		byte[] image11 = null, image22 = null,screenshot;
 
 		// JsonArray groupObject = jsonObject.getAsJsonArray("group");
 		/// POTREBNO URADITI DA IZ SVAKOG FAJLA CITA PODATKE!!!!!!
@@ -101,7 +105,7 @@ public class WebNekretnineMapper {
 				String price = rootNode.path("address").get(br).path("price").asText();//
 				String areas = rootNode.path("address").get(br).path("areas").asText();//
 				String ad_published = rootNode.path("address").get(br).path("ad_pubished").asText();// OK String
-				String titleOfDetailPage = rootNode.path("address").get(br).path("title").asText();//
+				String titleOfDetailPage = rootNode.path("address").get(br).path("name").asText();//
 				String description = rootNode.path("address").get(br).path("description").asText();// OK String
 				String address = rootNode.path("address").get(br).path("address").asText();
 				String floor = rootNode.path("address").get(br).path("floor").asText();
@@ -111,15 +115,15 @@ public class WebNekretnineMapper {
 				String street = rootNode.path("address").get(br).path("street").asText();
 				String price_per_m = rootNode.path("address").get(br).path("price_per_m").asText();
 
-				String image1 = rootNode.path("address").get(br).path("image1").asText();
-				String image2 = rootNode.path("address").get(br).path("image2").asText();
-
+				String image1 = rootNode.path("address").get(br).path("image1_url").asText();
+				String image2 = rootNode.path("address").get(br).path("image2_url").asText();
+				
 				br++;
 
 				// Grad koji nema adresu a ima grad je validan!
 				// Oglas koji nema grad ni adresu proveriti da li u name naslovu ima tih
 				// podataka
-				if (address.equals("") || address.contains(" m2") || address == null) {
+				/*if (address.equals("") || address.contains(" m2") || address == null) {
 					String grad = StringUtils.substringBefore(nameOfAd, " - ");
 					grad = grad.replace("-", "");
 
@@ -129,16 +133,18 @@ public class WebNekretnineMapper {
 					cite = grad;
 					address = nameOfAd;// Adresa za oglase kojima su podaci pomesani
 					address = StringUtils.substringAfter(address, " - ");
-				}
-
+				}*/
+				
 				// Priprema grada
 				if (cite.contains(" m2")) {
 					String grad = StringUtils.substringBefore(nameOfAd, " - ");
 					cite = grad;
-					System.out.println("Grad: " + cite);
+					//System.out.println("Grad: " + cite);
 
 				}
-				System.out.println("Grad2: " + cite);
+				if(cite.equalsIgnoreCase("Opština Novi Beograd") || cite.equalsIgnoreCase("Beograd Grad") || cite.equalsIgnoreCase("Opština Zemun")) {
+					cite="Beograd";
+				}
 
 				// Priprema addresse
 				float price_per_mFloat = 0;
@@ -149,12 +155,12 @@ public class WebNekretnineMapper {
 
 				} else {
 					// Priprema zemlje
-					state = "Srbija";
+					//state = "Srbija";
 
 					// Price prepare for DB
 
 					System.out.println("Cena pre: " + price);
-					String price1 = price.replace(" €", "");// Replaced .
+					String price1 = price.replace(" €", "");// Replaced € 	
 					price1 = price1.replace(".", "");
 					if (price == null || price.equals("")) {
 						price1 = "0";
@@ -163,12 +169,11 @@ public class WebNekretnineMapper {
 						price1="-3";
 					}
 					System.out.println("Cena posle: " + price1);
-					price2 = Integer.parseInt(price1);// Parse String to Int
+					price2 = Long.parseLong(price1);// Parse String to Int
 					// Price prepare for DB
 
 					// Areas prepare for INT
-					String areas1 = StringUtils.substringBetween(areas, "", "m2");
-					areas1 = areas1.replace(" ", "");
+					String areas1 = StringUtils.substringBetween(areas, "", " m2");
 					areas1 = areas1.replace(".", "");
 					areasInt = Integer.parseInt(areas1);
 					// Areas prepare for INT
@@ -193,7 +198,7 @@ public class WebNekretnineMapper {
 							// areasInt - povrsina kao broj //price2 - cena kao broj //nameOfAd - naslov
 							// urlToTheAd - url do oglasa //ad_pubished - datum oglasa
 							type_of_ad = "sell";
-							int price_per_mInt = price2 / areasInt;
+							int price_per_mInt = (int) (price2 / areasInt);
 						}
 					} else { // Price per meter square format for DB
 						String price_per_meter = price_per_m.replace("€/m2", "");
@@ -222,18 +227,21 @@ public class WebNekretnineMapper {
 				if (image2 != null) {
 					image22 = ImageDownloader.saveImage(image2, "image_2_" + 2);
 				}
+				
+				screenshot = WebPageScreenShotTaker.screenShot(urlToTheAd);
 
 				// UNOS U BAZU POCETAK!!!************************//
 				float num_of_roomsFloat;
 
 				String num_of_rooms1 = null;
-				String fullAddress = state + " " + cite + " " + street;
+				String fullAddress = state + " " + cite + " " + street + " " + address;
+				
 				if (num_of_rooms.contains(">")) {
 					num_of_rooms1 = num_of_rooms.replace(">", "");
 				}
 				if (num_of_rooms == null || num_of_rooms.equals("")) {
 					num_of_rooms1 = "0";
-				} else {
+				}else {
 					if(num_of_rooms.equalsIgnoreCase("Hotelu")) {
 						num_of_rooms1 = "-2";
 					}
@@ -246,64 +254,50 @@ public class WebNekretnineMapper {
 					}
 
 				}
+				
 				if (checkIsNumber(num_of_rooms)) {
 					num_of_rooms1 = num_of_rooms;
 				}
 				System.out.println("Broj soba: " + num_of_rooms1);
+				if(num_of_rooms1.isEmpty()) {
+					num_of_rooms1="0";
+				}
+				if (num_of_rooms1.contains(">")) {
+					num_of_rooms1 = num_of_rooms.replace(">", "");
+				}
+				if (num_of_rooms1.equalsIgnoreCase("Garsonjera")) {
+					num_of_rooms1 = "1";
+				}
 				num_of_roomsFloat = Float.parseFloat(num_of_rooms1);
 
 				SimpleDateFormat sdf1 = new SimpleDateFormat("dd.mm.YYYY");
 				java.util.Date date = sdf1.parse(ad_published);
 				sdf1.applyPattern("YYYY-mm-dd");
 				java.sql.Date date1 = new java.sql.Date(date.getTime());
-/*
+				String type_of_property="missing";
+				if(description.contains("Lokal") ||description.contains("lokal") || description.contains("Poslovni prostor") || description.contains("poslovni prostor")) {
+					type_of_property = "lokal";
+				}else if(description.contains("kuca") ||description.contains("kuce") || description.contains("Kuca") || description.contains("kuća") || description.contains("Kuća")) {
+					type_of_property = "house";
+				}else  if(description.contains("stan") ||description.contains("Stan") || description.contains("apartman") || description.contains("Apartman")) {
+					type_of_property = "apartment";
+				}
+				
+				int building_year = 0;
+				
 				AdvertiseWebNekretnine adv = new AdvertiseWebNekretnine(nameOfAd, urlToTheAd, price2, areasInt, date1,
 						titleOfDetailPage, description, address, fullAddress, floor, num_of_roomsFloat, cite, state,
-						street, price_per_mFloat, image11, image22, type_of_ad);
-*/
-				//ls.add(adv);
-				// insert.saveRecord(adv);
+						street, price_per_mFloat, image11, image22, type_of_ad, type_of_property, building_year,screenshot);
+
+				ls.add(adv);
+				 InsertRecordInDatabaseWithJdbcTemplate.saveRecord(adv);
 
 				// ************************************************//
 				// Oglasi koji su cisti i spremni za unos
 				// ************************************************//
-				if (!nameOfAd.equals("") && !urlToTheAd.equals("") && !price.equals("") && !areas.equals("")
-						&& !ad_published.equals("") && !titleOfDetailPage.equals("") && !description.equals("")
-						&& !address.equals("") && !floor.equals("") && !num_of_rooms.equals("") && !cite.equals("")
-						&& !state.equals("") && !street.equals("") && !price_per_m.equals("")) {
-
-					br2++;
-
-					// byte[] image11 = ImageDownloader.saveImage(image1, "image_1_" + 1);
-					// byte[] image22 = ImageDownloader.saveImage(image1, "image_2_" + 2);
-
-					// float num_of_roomsFloat;
-					// String fullAddress = state + " " + cite + " " + street;
-					// if(num_of_rooms.equalsIgnoreCase("Garsonjera")) {
-					// num_of_roomsFloat = 1;
-					// }else {
-					// String num_of_rooms1 = num_of_rooms.replace(">", "");
-					// num_of_roomsFloat = Float.parseFloat(num_of_rooms1);
-					// }
-
-					/*
-					 * String startDate = "01-02-2013"; SimpleDateFormat sdf1 = new
-					 * SimpleDateFormat("dd.mm.YYYY"); java.util.Date date =
-					 * sdf1.parse(ad_published); sdf1.applyPattern("YYYY-mm-dd"); java.sql.Date
-					 * date1 = new java.sql.Date(date.getTime());
-					 */
-
-//					AdvertiseWebNekretnine adv = new AdvertiseWebNekretnine(nameOfAd, urlToTheAd, price2, areasInt,
-//							date1, titleOfDetailPage, description, address, fullAddress, floor, num_of_roomsFloat, cite,
-//							state, street, price_per_mFloat, image11, image22, type_of_ad);
-//
-//					ls.add(adv);
-//					insert.saveRecord(adv);
-					// System.out.println(adv);
-				}
-
 			}
-
+			
+			
 			// System.out.println("*********************************************************************");
 		} catch (IOException | org.json.simple.parser.ParseException e) {
 			System.out.println("Greska: ");
@@ -320,7 +314,6 @@ public class WebNekretnineMapper {
 
 	private static boolean checkIsNumber(String address) {
 		try {
-			float broj = Float.parseFloat(address);
 			return true;
 		} catch (Exception e) {
 			return false;

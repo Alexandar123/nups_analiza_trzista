@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RasporedGrupaApplication {
+public class NUPSAnalizaApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RasporedGrupaApplication.class, args);
+		SpringApplication.run(NUPSAnalizaApp.class, args);
 	}
 
 }

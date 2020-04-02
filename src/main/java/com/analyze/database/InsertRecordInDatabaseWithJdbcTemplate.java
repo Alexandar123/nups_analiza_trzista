@@ -1,4 +1,4 @@
-package com.analyze.configuration;
+package com.analyze.database;
 
 
 import java.sql.SQLException;
@@ -9,23 +9,18 @@ import java.util.Optional;
 import javax.sql.DataSource;
 
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import com.analyze.model.AdvertiseWebNekretnine;
-import com.analyze.repositories.DatabaseMethodRepo;
 
-public class InsertRecordInDatabaseWithJdbcTemplate implements DatabaseMethodRepo{
-
-	private static final String driverClassName = "com.mysql.cj.jdbc.Driver";
-	private static final String url = "jdbc:mysql://localhost/trzistenekretninedb?useUnicode=yes&characterEncoding=UTF-8";
-	private static final String dbUsername = "root";
-	private static final String dbPassword = "";
+public class InsertRecordInDatabaseWithJdbcTemplate{
 
 	private static final String selectSql = "SELECT * FROM ";
 	private static final String insertSql =
 
-			"INSERT INTO test_data5 (" +
+			"INSERT INTO test_data5_no_image (" +
 
 					" name, " +
 
@@ -57,9 +52,22 @@ public class InsertRecordInDatabaseWithJdbcTemplate implements DatabaseMethodRep
 	
 
 	private static DataSource dataSource;
+	
+	@Bean
+	public static DataSource dataSource() {
+	    DriverManagerDataSource dataSource = new DriverManagerDataSource();
+	 
+	    dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+	    dataSource.setUsername("root");
+	    dataSource.setPassword("");
+	    dataSource.setUrl("jdbc:mysql://localhost/trzistenekretninedb?useUnicode=yes&characterEncoding=UTF-8"); 
+	     
+	    return dataSource;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public static List<AdvertiseWebNekretnine> getData(String table) {
-		dataSource = getDataSource();
+		dataSource = dataSource();
 		JdbcTemplate template = new JdbcTemplate(dataSource);
 		
 		// define query arguments
@@ -89,7 +97,7 @@ public class InsertRecordInDatabaseWithJdbcTemplate implements DatabaseMethodRep
 
 	}
 	public static void updateData(Long id, String table, String column, byte[] bImg) {
-		dataSource = getDataSource();
+		dataSource = dataSource();
 		JdbcTemplate template = new JdbcTemplate(dataSource);
 		
 		// define query arguments
@@ -104,7 +112,7 @@ public class InsertRecordInDatabaseWithJdbcTemplate implements DatabaseMethodRep
 
 	}
 	public static void saveRecord(AdvertiseWebNekretnine adv) {
-		dataSource = getDataSource();
+		dataSource = dataSource();
 		JdbcTemplate template = new JdbcTemplate(dataSource);
 
 		// define query arguments
@@ -124,88 +132,5 @@ public class InsertRecordInDatabaseWithJdbcTemplate implements DatabaseMethodRep
 		System.out.println(row + " row inserted.");
 
 	}
-
-	public static DriverManagerDataSource getDataSource() {
-
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		
-		dataSource.setDriverClassName(driverClassName);
-
-		dataSource.setUrl(url);
-
-		dataSource.setUsername(dbUsername);
-
-		dataSource.setPassword(dbPassword);
-		
-		return dataSource;
-	}
 	
-	@Override
-	public <S extends AdvertiseWebNekretnine> S save(S entity) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public <S extends AdvertiseWebNekretnine> Iterable<S> saveAll(Iterable<S> entities) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Optional<AdvertiseWebNekretnine> findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean existsById(Long id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Iterable<AdvertiseWebNekretnine> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Iterable<AdvertiseWebNekretnine> findAllById(Iterable<Long> ids) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public long count() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void deleteById(Long id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(AdvertiseWebNekretnine entity) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteAll(Iterable<? extends AdvertiseWebNekretnine> entities) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteAll() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-
 }

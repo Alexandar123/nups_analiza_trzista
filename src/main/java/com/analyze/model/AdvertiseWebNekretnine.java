@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "test_data5")
+@Table(name = "test_data5_no_image")
 public class AdvertiseWebNekretnine {
 
 	@Id
@@ -69,11 +69,11 @@ public class AdvertiseWebNekretnine {
 		this.type_of_property = type_of_property;
 		this.building_year = building_yer;
 	}
-
+	
 	public AdvertiseWebNekretnine() {
 	}
 
-	public AdvertiseWebNekretnine(String name, String url, Long price, int areas, Date ad_published, String title,
+	public AdvertiseWebNekretnine(Long id, String name, String url, Long price, int areas, Date ad_published, String title,
 			String description, String address, String full_address, String floor, float num_of_rooms, String city,
 			String state, String street, float price_per_m, byte[] image1, byte[] image2, String type_of_ad,
 			int building_yer, byte[] screenshot) {
@@ -213,10 +213,10 @@ public class AdvertiseWebNekretnine {
 		this.building_year = building_yer;
 	}
 
-	public AdvertiseWebNekretnine(Long id, String name, String url, Long price, int areas, Date ad_published,
+	public AdvertiseWebNekretnine(String name, String url, Long price, int areas, Date ad_published,
 			String title, String description, String address, String full_address, String floor, float num_of_rooms,
 			String city, String state, String street, float price_per_m, byte[] image1, byte[] image2,
-			String type_of_ad, int building_yer) {
+			String type_of_ad, int building_yer, byte[] screenshot) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -238,6 +238,7 @@ public class AdvertiseWebNekretnine {
 		this.image2 = image2;
 		this.type_of_ad = type_of_ad;
 		this.building_year = building_yer;
+		this.screenshot = screenshot;
 	}
 
 	public String getType_of_ad() {

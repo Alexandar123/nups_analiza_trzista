@@ -14,15 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.analyze.WebPageScreenShotTaker;
-import com.analyze.configuration.InsertRecordInDatabaseWithJdbcTemplate;
+import com.analyze.database.InsertRecordInDatabaseWithJdbcTemplate;
 import com.analyze.model.AdvertiseWebNekretnine;
 import com.analyze.repositories.OglasiRepository;
 
 @Component
 public class AddScreenShotToAdController {
 	public static void main(String[] args) throws IOException {
-
-		List<AdvertiseWebNekretnine> listOfAd = InsertRecordInDatabaseWithJdbcTemplate.getData("test_data5");
+		//Svi url od svih oglasa iz tabele koji nemaju screenshot - Screenshot se pravi kada se preuzima oglas!! Deprecate
+		List<AdvertiseWebNekretnine> listOfAd = InsertRecordInDatabaseWithJdbcTemplate.getData("test_data5_no_image");
 
 		insertScreenShotForAd(listOfAd);
 		// checkAndUpdateIfAdExist();
@@ -35,7 +35,7 @@ public class AddScreenShotToAdController {
 		for (int i = 16761; i < listOfAd.size(); i++) {
 			if (checkIfAdExist(listOfAd.get(i).getUrl())) {
 				bImg = screenShot.screenShot(listOfAd.get(i).getUrl());
-				InsertRecordInDatabaseWithJdbcTemplate.updateData(listOfAd.get(i).getId(), "test_data5", "screenshot",
+				InsertRecordInDatabaseWithJdbcTemplate.updateData(listOfAd.get(i).getId(), "test_data5_no_image", "screenshot",
 						bImg);
 				br++;
 				System.out.println(listOfAd.get(i).getUrl());

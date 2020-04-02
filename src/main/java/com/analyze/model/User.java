@@ -38,13 +38,12 @@ public class User {
 
 	@Column(name = "date_of_creating_account")
 	private Timestamp date_of_creating_account;
-	@Column(name = "last_login")
-	private Timestamp last_login;
+
 	@Column(name = "coins_expiration")
-	private Timestamp coins_expiration;
+	private Date coins_expiration;
 
 	public User(Long id, String name, String lastname, String email, String mobile, int points, String country,
-			String city, Timestamp date_of_creating_account, Timestamp last_login, Timestamp coins_expiration) {
+			String city, Timestamp date_of_creating_account, Timestamp last_login, Date coins_expiration) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -55,7 +54,6 @@ public class User {
 		this.country = country;
 		this.city = city;
 		this.date_of_creating_account = date_of_creating_account;
-		this.last_login = last_login;
 		this.coins_expiration = coins_expiration;
 	}
 	public User() {}
@@ -131,19 +129,11 @@ public class User {
 		this.date_of_creating_account = date_of_creating_account;
 	}
 
-	public Timestamp getLast_login() {
-		return last_login;
-	}
-
-	public void setLast_login(Timestamp last_login) {
-		this.last_login = last_login;
-	}
-
-	public Timestamp getCoins_expiration() {
+	public Date getCoins_expiration() {
 		return coins_expiration;
 	}
 
-	public void setCoins_expiration(Timestamp coins_expiration) {
+	public void setCoins_expiration(Date coins_expiration) {
 		this.coins_expiration = coins_expiration;
 	}
 
@@ -151,8 +141,7 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", lastname=" + lastname + ", email=" + email + ", mobile="
 				+ mobile + ", points=" + points + ", country=" + country + ", city=" + city
-				+ ", date_of_creating_account=" + date_of_creating_account + ", last_login=" + last_login
-				+ ", coins_expiration=" + coins_expiration + "]";
+				+ ", date_of_creating_account=" + date_of_creating_account + ", coins_expiration=" + coins_expiration + "]";
 	}
 
 }

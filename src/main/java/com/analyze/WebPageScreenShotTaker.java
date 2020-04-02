@@ -10,20 +10,20 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
+@Configuration
 public class WebPageScreenShotTaker {
 	static int screenshotNum = 0;
 	static WebDriver driver = null;
-
-	/*public static void main(String[] args) throws IOException {
-		initDriver();
-		WebPageScreenShotTaker ws = new WebPageScreenShotTaker();
-		ws.capture("https://www.webnekretnine.net/oglas-1780828-nekretnina-Prodaja+stanova-Beograd-Srbija.html");
-
-		destroy();
+	@Value("${screenshot.directory}")
+	private static String directory;
+	public static void main(String[] args) {
+		System.out.println("Dir: " + WebPageScreenShotTaker.directory);
 	}
-*/
-	public byte[] screenShot(String url) {
+	public static byte[] screenShot(String url) {
 		byte[] byteImage = null;
 		initDriver();
 		WebPageScreenShotTaker ws = new WebPageScreenShotTaker();
@@ -50,7 +50,7 @@ public class WebPageScreenShotTaker {
 		driver.get(site);
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		byte[] b = Files.readAllBytes(scrFile.toPath());
-		FileUtils.copyFile(scrFile, new File("C:\\ttt\\" + screenshotNum + ".png"));
+		FileUtils.copyFile(scrFile, new File(directory + screenshotNum + ".png"));
 		System.out.println("Took Screenshot for " + site + " and saved as " + "site" + screenshotNum + ".png");
 		return b;
 	}
