@@ -92,7 +92,8 @@ public class InsertRecordInDatabaseWithJdbcTemplate{
 				rs.getFloat("price_per_m"),
 				rs.getString("type_of_ad"),
 				rs.getString("type_of_property"),
-				rs.getInt("building_year")
+				rs.getInt("building_year"),
+				rs.getInt("active")
 				));
 
 	}

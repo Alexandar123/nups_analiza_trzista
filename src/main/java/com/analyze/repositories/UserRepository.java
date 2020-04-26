@@ -37,4 +37,11 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	@Transactional
 	@Query(value = "SELECT * FROM users WHERE email = ?1 ", nativeQuery = true)
 	User login(String email);
+	
+	@Transactional
+	@Modifying
+	@Query(value="UPDATE users set name = ?1, lastname = ?2, mobile=?3, country=?4, city=?5 WHERE id = ?6", nativeQuery = true)
+	void updateUser(String name, String lastname, String mobile, String country, String city, Long id);
+
+	
 }

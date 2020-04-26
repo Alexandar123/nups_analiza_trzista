@@ -12,8 +12,8 @@
 	<groupId>com.rest</groupId>
 	<artifactId>Raspored_grupa</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Raspored_grupa</name>
-	<description>Projekat za raspored studenata po grupama</description>
+	<name>NUPS analiza trzista</name>
+	<description>Projekat za Nacionalno Udruzenje Procenitelja Srbije za analizu trzista nekretnina i zemljista</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -37,7 +37,11 @@
 			<version>1.3.2</version>
 			<scope>compile</scope>
 		</dependency>
-		<dependency><groupId>com.twelvemonkeys.imageio</groupId><artifactId>imageio-jpeg</artifactId><version>3.3.1</version></dependency>
+		<dependency>
+			<groupId>com.twelvemonkeys.imageio</groupId>
+			<artifactId>imageio-jpeg</artifactId>
+			<version>3.3.1</version>
+		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
@@ -108,46 +112,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-		<!-- Odavde obrisati -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.9.7</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-			<version>2.9.7</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-annotations</artifactId>
-			<version>2.9.7</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.fasterxml.jackson.jaxrs</groupId>
-			<artifactId>jackson-jaxrs-json-provider</artifactId>
-			<version>2.9.7</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.module</groupId>
-			<artifactId>jackson-module-jaxb-annotations</artifactId>
-			<version>2.9.7</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.json/json -->
-		<dependency>
-			<groupId>org.json</groupId>
-			<artifactId>json</artifactId>
-			<version>20190722</version>
-		</dependency>
-		<dependency>
-			<groupId>com.googlecode.json-simple</groupId>
-			<artifactId>json-simple</artifactId>
-			<version>1.1</version>
-		</dependency>
-		<!-- DOVDE OBRISATI -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -217,6 +181,14 @@
 			<artifactId>jackson-annotations</artifactId>
 			<version>2.9.3</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/ru.yandex.qatools.ashot/ashot -->
+		<dependency>
+			<groupId>ru.yandex.qatools.ashot</groupId>
+			<artifactId>ashot</artifactId>
+			<version>1.5.3</version>
+		</dependency>
+
+
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>

@@ -379,3 +379,32 @@
 [0314/112647.828:ERROR:process_info.cc(359)] UncheckedAllocate
 [0402/205029.020:ERROR:process_info.cc(359)] UncheckedAllocate
 [0402/205029.074:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\agordic\AppData\Local\Temp\scoped_dir112608_503861250\Crashpad\reports\66300403-d39e-4fbd-bd2b-8a6cc04b18f8.dmp: The process cannot access the file because it is being used by another process. (0x20)
+[0402/231227.748:ERROR:process_info.cc(359)] UncheckedAllocate
+[0404/083327.162:ERROR:process_info.cc(375)] NtQuerySystemInformation SystemExtendedHandleInformation: The specified information record length does not match the length required for the specified information class. (0xc0000004)
+[0404/083339.321:ERROR:http_transport_win.cc(276)] WinHttpSendRequest: The operation completed successfully. (0x0)
+[0405/112611.402:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\agordic\AppData\Local\Temp\scoped_dir29404_434478973\Crashpad\reports\46d60807-3944-4143-9bdd-4a378cbd8af0.dmp: The process cannot access the file because it is being used by another process. (0x20)
+[0405/112612.033:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\agordic\AppData\Local\Temp\scoped_dir29404_434478973\Crashpad\reports\3492cdee-d987-4b15-8fec-9fa5291ccb75.dmp: The process cannot access the file because it is being used by another process. (0x20)
+[0406/031341.709:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\agordic\AppData\Local\Temp\scoped_dir117936_66172346\Crashpad\reports\31eb7230-8853-447f-869c-a63882dc76fa.dmp: The process cannot access the file because it is being used by another process. (0x20)
+[0406/031341.760:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\agordic\AppData\Local\Temp\scoped_dir117936_66172346\Crashpad\reports\0013e210-2312-4064-9bf5-e19a6f209663.dmp: The process cannot access the file because it is being used by another process. (0x20)
+[0407/005000.693:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\agordic\AppData\Local\Temp\scoped_dir96920_1102538079\Crashpad\reports\fd33177d-b6ac-430f-8f59-f65eba41f19c.dmp: The process cannot access the file because it is being used by another process. (0x20)
+[0408/041007.683:ERROR:process_info.cc(359)] UncheckedAllocate
+[0408/041008.479:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\agordic\AppData\Local\Temp\scoped_dir82644_905241324\Crashpad\reports\0acf4974-a03d-4036-90f9-bfee25fd5972.dmp: The process cannot access the file because it is being used by another process. (0x20)
+[0411/215636.036:ERROR:file_io.cc(134)] WriteFile: The pipe is being closed. (0xE8)
+[0420/222112.375:ERROR:process_info.cc(359)] UncheckedAllocate
+[0422/054442.124:ERROR:file_io.cc(89)] ReadExactly: expected 36, observed 0
+[0423/043937.572:ERROR:process_reader_win.cc(108)] process 34004 not found
+[0423/043937.573:ERROR:exception_snapshot_win.cc(98)] thread ID 134524 not found in process
+[0423/043937.574:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[0423/060050.422:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\agordic\AppData\Local\Temp\scoped_dir164116_870973777\Crashpad\reports\97d7206e-a05c-4b5f-9b2e-20d74947603d.dmp: The process cannot access the file because it is being used by another process. (0x20)
+[0423/234319.103:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0423/234319.109:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0423/234319.109:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0423/234319.109:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0423/234319.109:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0423/234319.109:ERROR:exception_snapshot_win.cc(98)] thread ID 54184 not found in process
+[0424/042333.956:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\agordic\AppData\Local\Temp\scoped_dir167008_1321106598\Crashpad\reports\7c9701f2-3b3e-43f5-aaf5-d75296cf17ff.dmp: The process cannot access the file because it is being used by another process. (0x20)
+[0425/140849.258:ERROR:process_info.cc(359)] UncheckedAllocate
+[0425/151349.365:ERROR:process_info.cc(375)] NtQuerySystemInformation SystemExtendedHandleInformation: The specified information record length does not match the length required for the specified information class. (0xc0000004)
+[0426/025807.095:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\agordic\AppData\Local\Temp\scoped_dir169132_713095602\Crashpad\reports\c89d85ff-ed82-4fad-a90f-be339641c92b.dmp: The process cannot access the file because it is being used by another process. (0x20)
+[0426/093257.671:ERROR:file_io.cc(134)] WriteFile: The pipe is being closed. (0xE8)
+[0426/093326.892:ERROR:file_io.cc(134)] WriteFile: The pipe is being closed. (0xE8)

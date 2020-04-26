@@ -35,15 +35,18 @@ public class User {
 	private String country;
 	@Column(name = "city")
 	private String city;
+	
+	@Column(name="auth_id")
+	private String auth_id;
 
 	@Column(name = "date_of_creating_account")
-	private Timestamp date_of_creating_account;
+	private Date date_of_creating_account;
 
 	@Column(name = "coins_expiration")
 	private Date coins_expiration;
 
 	public User(Long id, String name, String lastname, String email, String mobile, int points, String country,
-			String city, Timestamp date_of_creating_account, Timestamp last_login, Date coins_expiration) {
+			String city, Date date_of_creating_account, Timestamp last_login, Date coins_expiration, String auth_id ) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -55,6 +58,7 @@ public class User {
 		this.city = city;
 		this.date_of_creating_account = date_of_creating_account;
 		this.coins_expiration = coins_expiration;
+		this.auth_id = auth_id;
 	}
 	public User() {}
 	public Long getId() {
@@ -121,11 +125,11 @@ public class User {
 		this.city = city;
 	}
 
-	public Timestamp getDate_of_creating_account() {
+	public Date getDate_of_creating_account() {
 		return date_of_creating_account;
 	}
 
-	public void setDate_of_creating_account(Timestamp date_of_creating_account) {
+	public void setDate_of_creating_account(Date date_of_creating_account) {
 		this.date_of_creating_account = date_of_creating_account;
 	}
 
@@ -135,6 +139,13 @@ public class User {
 
 	public void setCoins_expiration(Date coins_expiration) {
 		this.coins_expiration = coins_expiration;
+	}
+
+	public String getAuth_id() {
+		return auth_id;
+	}
+	public void setAuth_id(String auth_id) {
+		this.auth_id = auth_id;
 	}
 
 	@Override

@@ -17,15 +17,26 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.analyze.WebPageScreenShotTaker;
 import com.analyze.controllers.AddScreenShotToAdController;
 import com.analyze.database.InsertRecordInDatabaseWithJdbcTemplate;
 import com.analyze.model.AdvertiseWebNekretnine;
+import com.analyze.repositories.AdvertiseManagerRepo;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+@Service
 public class RealliticaMapperCG {
+	
+	private static AdvertiseManagerRepo advertiseManagerRepo;
+	
+	@Autowired
+	public RealliticaMapperCG(AdvertiseManagerRepo advertiseManagerRepo) {
+		this.advertiseManagerRepo = advertiseManagerRepo;
+	}
 
 	public static void main(String[] args) {
 		String BASE = "C:\\Users\\agordic\\Desktop\\DataTrziste\\Podaci\\realitica\\realitica_30_3_2020_HN.json";
@@ -252,6 +263,7 @@ public class RealliticaMapperCG {
 							street, price_per_m, image11, image22, type_of_ad, type_of_property, building_year,screenshot);
 
 					ls.add(adv);
+					//advertiseManagerRepo.save(adv);
 					 InsertRecordInDatabaseWithJdbcTemplate.saveRecord(adv);
 					
 					// System.out.println("Broj: " + br);

@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class AdvertiseWebNekretnine {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_ad")
 	private Long id;
 	private String name;
@@ -43,11 +43,12 @@ public class AdvertiseWebNekretnine {
 	private byte[] screenshot;
 	private double lon;
 	private double lat;
+	private int active;
 
 	public AdvertiseWebNekretnine(Long id, String name, String url, Long price, int areas, Date ad_published,
 			String title, String description, String address, String full_address, String floor, float num_of_rooms,
 			String city, String state, String street, float price_per_m, String type_of_ad, String type_of_property,
-			int building_yer) {
+			int building_yer, int active) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -68,6 +69,7 @@ public class AdvertiseWebNekretnine {
 		this.type_of_ad = type_of_ad;
 		this.type_of_property = type_of_property;
 		this.building_year = building_yer;
+		this.active = active;
 	}
 	
 	public AdvertiseWebNekretnine() {
@@ -456,13 +458,21 @@ public class AdvertiseWebNekretnine {
 	public void setScreenshot(byte[] screenshot) {
 		this.screenshot = screenshot;
 	}
+	
+	public int getActive() {
+		return active;
+	}
+	
+	public void setActive(int active) {
+		this.active = active;
+	}
 
 	@Override
 	public String toString() {
 		return "AdvertiseWebNekretnine [id=" + id + ", name=" + name + ", url=" + url + ", price=" + price + ", areas="
 				+ areas + ", ad_published=" + ad_published + ", title=" + title + ", description=" + description
 				+ ", address=" + address + ", floor=" + floor + ", num_of_rooms=" + num_of_rooms + ", city=" + city
-				+ ", state=" + state + ", street=" + street + ", price_per_m=" + price_per_m;
+				+ ", state=" + state + ", street=" + street + ", price_per_m=" + price_per_m + ", active= " + active;
 	}
 
 }
