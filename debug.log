@@ -408,3 +408,14 @@
 [0426/025807.095:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\agordic\AppData\Local\Temp\scoped_dir169132_713095602\Crashpad\reports\c89d85ff-ed82-4fad-a90f-be339641c92b.dmp: The process cannot access the file because it is being used by another process. (0x20)
 [0426/093257.671:ERROR:file_io.cc(134)] WriteFile: The pipe is being closed. (0xE8)
 [0426/093326.892:ERROR:file_io.cc(134)] WriteFile: The pipe is being closed. (0xE8)
+[0427/010315.323:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\agordic\AppData\Local\Temp\scoped_dir7272_1194609267\Crashpad\reports\e5bb7dc5-c86e-4f5b-8fdb-990f440552fb.dmp: The process cannot access the file because it is being used by another process. (0x20)
+[0429/144243.492:ERROR:file_io.cc(89)] ReadExactly: expected 36, observed 0
+[0501/110224.651:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\agordic\AppData\Local\Temp\scoped_dir121556_713481059\Crashpad\reports\85a2583f-d47e-40c1-8029-818d71cd5899.dmp: The process cannot access the file because it is being used by another process. (0x20)
+[0501/112704.929:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\agordic\AppData\Local\Temp\scoped_dir120704_1243979896\Crashpad\reports\fd437361-a6a6-496e-b8e0-5c9fea251f56.dmp: The process cannot access the file because it is being used by another process. (0x20)
+[0503/031527.113:ERROR:process_info.cc(375)] NtQuerySystemInformation SystemExtendedHandleInformation: The specified information record length does not match the length required for the specified information class. (0xc0000004)
+[0503/031653.292:ERROR:process_info.cc(375)] NtQuerySystemInformation SystemExtendedHandleInformation: The specified information record length does not match the length required for the specified information class. (0xc0000004)
+[0503/031713.782:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\agordic\AppData\Local\Temp\scoped_dir150248_136514393\Crashpad\reports\b7e897e1-cfc3-4f4a-a66d-ded73a604713.dmp: The process cannot access the file because it is being used by another process. (0x20)
+[0503/140059.946:ERROR:file_io.cc(89)] ReadExactly: expected 36, observed 0
+[0503/152513.571:ERROR:file_io.cc(134)] WriteFile: The pipe is being closed. (0xE8)
+[0506/045008.817:ERROR:process_info.cc(359)] UncheckedAllocate
+[0506/045028.482:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\agordic\AppData\Local\Temp\scoped_dir123032_481001596\Crashpad\reports\ddbdb00e-273d-4a8b-a584-9ca4af6a9788.dmp: The process cannot access the file because it is being used by another process. (0x20)

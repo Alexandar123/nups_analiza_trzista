@@ -27,13 +27,14 @@ import com.analyze.model.AdvertiseWebNekretnine;
 import com.analyze.repositories.AdvertiseManagerRepo;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.base.Strings;
 
 @Service
 public class RealiticaMapper {
 	
 
 	public static void main(String[] args) {
-		String BASE = "C:\\Users\\agordic\\Desktop\\DataTrziste\\Podaci\\realitica\\realitica_rent1.json";
+		String BASE = "C:\\Users\\agordic\\Desktop\\DataTrziste\\Podaci\\realitica\\realitica_najam_5_4_2020.json";
 		String EXTENSION = ".json";
 
 		Instant start = Instant.now();
@@ -60,7 +61,7 @@ public class RealiticaMapper {
 		ArrayList<AdvertiseWebNekretnine> ls = new ArrayList<AdvertiseWebNekretnine>();
 		InsertRecordInDatabaseWithJdbcTemplate insert = new InsertRecordInDatabaseWithJdbcTemplate();
 
-		String  floorInt = "-1", type_of_property = null, title = null, address = null, city = null, fullAddress = null,
+		String  floorInt = "-1", type_of_property = null, title = null, address = null, fullAddress = null,
 				state = null, floor = null, num_of_roomsString = null, street = null, type_of_ad=null;
 		int areasInt = 0, numOfRoom = -1, building_year;
 		Long priceInt;
@@ -90,6 +91,18 @@ public class RealiticaMapper {
 				String type = rootNode.path("images").get(br).path("type").asText();
 				String areas = rootNode.path("images").get(br).path("areas").asText();
 				String ad_published = rootNode.path("images").get(br).path("last_changes").asText();
+				String city = null;
+				address  = rootNode.path("images").get(br).path("region").asText();
+				if(address.contains("Novi Sad")) {
+					city = "novi sad";
+				}else {
+					city = "beograd";
+				}
+				
+				String location = rootNode.path("images").get(br).path("location").asText();
+				street = address + " " + location;
+				fullAddress = city + " " + address + " " + location;
+				num_of_roomsString = rootNode.path("images").get(br).path("num_of_room").asText();
 				
 				String description = rootNode.path("images").get(br).path("details").asText();
 				//String description = descriptionOriginal;
@@ -102,7 +115,13 @@ public class RealiticaMapper {
 				building_year = Integer.parseInt(buldin);
 				state="SRBIJA";
 				
-				if(type.contains("Prodajem") || type.contains("prodajem") || name.contains("prodajem") || name.contains("Prodajem") ) {
+				if(num_of_roomsString.contains(",")) {
+					num_of_roomsString = num_of_roomsString.replace(",", ".");
+				}
+				double num_of_rooms = Strings.isNullOrEmpty(num_of_roomsString) ? -1 : Double.parseDouble(num_of_roomsString);
+				
+				
+				if(type.contains("Prodajem") || type.contains("prodajem") || name.contains("prodajem") || name.contains("Prodajem") || name.contains("Prodaja") || name.contains("prodaja")) {
 					type_of_ad = "sell";
 				}else {
 					type_of_ad = "rent";
@@ -111,10 +130,10 @@ public class RealiticaMapper {
 				if (description != null) {
 
 					if(type.contains("Prodajem Stan-Apartman") || type.contains("Stan") || type.contains("Apartman") 
-							|| type.contains("Apartment") || type.contains("garsonjera") || type.contains("Garsonjera")) {
+							|| type.contains("Apartment") || type.contains("garsonjera") || type.contains("Garsonjera") || type.contains("Stan-Apartman")) {
 						type_of_property = "apartment";
 					}else if(type.contains("Prodajem Zemljište") || type.contains("Prodajem Građevinsko Zemljište") ||
-							type.contains("Prodajem Gradjevinsko Zemljište") || type.contains("prodajem plac") || type.contains("zemljiste") || type.contains("Zemljiste") || type.contains("Zemljište") || type.contains("zemljište")){
+							type.contains("Prodajem Gradjevinsko Zemljište") || type.contains("prodajem plac") || type.contains("zemljiste") || type.contains("Zemljiste") || type.contains("Zemljište") || type.contains("zemljište") || type.contains("plac")){
 						type_of_property = "land";
 					}else if(type.contains("Prodajem Kuću") || type.contains("Kucu") || type.contains("Kuca") || type.contains("Kuću")
 							|| type.contains("Kuća") || type.contains("kucu") || type.contains("kuću") || type.contains("Kuće")) {
@@ -131,11 +150,15 @@ public class RealiticaMapper {
 					price = price.replace("€", "");
 					priceInt = Long.parseLong(price);
 
-					if (image1 != null || image2 != null) {
+					if (!Strings.isNullOrEmpty(image1)) {
 						 image11 = ImageDownloader.saveImage(image1, "image_1_" + 1);
+					}else {
+						image11 = null;
 					}
-					if (image2 != null) {
+					if (!Strings.isNullOrEmpty(image2)) {
 						 image22 = ImageDownloader.saveImage(image2, "image_2_" + 2);
+					}else {
+						image22 = null;
 					}
 					 screenshot = WebPageScreenShotTaker.screenShot(url);
 
@@ -151,26 +174,30 @@ public class RealiticaMapper {
 				}else {
 						title = "Undefind";
 					}
-					city = StringUtils.substringBetween(description, "Područje: ", "\n");
-					String aaddress = StringUtils.substringBetween(description, "Lokacija: ", "\n");
-					address = (aaddress == null) ? city : aaddress;
-					fullAddress = city + " " + address;
-					street = address;
+					//city = StringUtils.substringBetween(description, "Područje: ", "\n");
+					//String aaddress = StringUtils.substringBetween(description, "Lokacija: ", "\n");
+					//address = (Strings.isNullOrEmpty(aaddress)) ? city : aaddress;
+					//fullAddress = city + " " + address;
+					//street = address;
 
 					String num = StringUtils.substringBetween(description, "Spavaćih Soba: ", "\n");
 					
 					
-					if (num == null)
+					if (Strings.isNullOrEmpty(num) && !Strings.isNullOrEmpty(num_of_roomsString)) {
+						num = num_of_roomsString;
+					}else {
 						num = "-1";
+					}
+						
 					
 					if(num.equals("0,5")) {
 						num = "1";
 					}
-					numOfRoom = Integer.parseInt(num.equals("") ? "-1" : num);
+					numOfRoom = Integer.parseInt(num);
 					
 					// Exit from loop
 					br++;
-					if(areas.equals(null) || !areas.equals("")) {
+					if(!Strings.isNullOrEmpty(areas)) {
 						String ar = areas.replace(" m2", "");
 						ar = ar.replace(",", "");
 						ar = ar.replace(".", "");
@@ -211,7 +238,7 @@ public class RealiticaMapper {
 					else
 					price_per_m = priceInt / areasInt;
 
-					if(!ad_published.equals(null) || !ad_published.equals("")) {
+					if(!Strings.isNullOrEmpty(ad_published)) {
 						SimpleDateFormat sdf1 = new SimpleDateFormat("dd MMM,YYYY");
 						java.util.Date date = sdf1.parse(ad_published);
 						sdf1.applyPattern("YYYY-mm-dd");

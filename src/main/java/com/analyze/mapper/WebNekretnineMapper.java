@@ -42,7 +42,7 @@ public class WebNekretnineMapper {
 	private static String FULL_PATH;
 
 	public static void main(String[] args) {
-		String BASE = "C:\\Users\\agordic\\Desktop\\DataTrziste\\Podaci\\webnekretnine\\webnekretnine2";
+		String BASE = "C:\\Users\\agordic\\Desktop\\DataTrziste\\Podaci\\webnekretnine\\webnekretnine3";
 		String EXTENSION = ".json";
 
 		Instant start = Instant.now();
