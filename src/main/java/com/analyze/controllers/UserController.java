@@ -21,7 +21,7 @@ import com.analyze.model.User;
 import com.analyze.repositories.UserRepository;
 
 @RestController
-@RequestMapping("geo/user")
+@RequestMapping("api/geo/user")
 public class UserController {
 	private UserRepository userRepository;
 	static Logger log = LogManager.getLogger(UserController.class);

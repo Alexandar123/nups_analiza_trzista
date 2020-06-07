@@ -59,8 +59,8 @@ public class InsertRecordInDatabaseWithJdbcTemplate{
 	 
 	    dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
 	    dataSource.setUsername("root");
-	    dataSource.setPassword("");
-	    dataSource.setUrl("jdbc:mysql://localhost/trzistenekretninedb?useUnicode=yes&characterEncoding=UTF-8"); 
+	    dataSource.setPassword("=HvOGzUg^XQ]");
+	    dataSource.setUrl("jdbc:mysql://185.119.89.21:2087/trzistenekretninedb?useUnicode=yes&characterEncoding=UTF-8"); 
 	     
 	    return dataSource;
 	}

@@ -1,6 +1,7 @@
 package com.analyze.model;
 
 import java.sql.Date;
+import java.util.Arrays;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -470,9 +471,16 @@ public class AdvertiseWebNekretnine {
 	@Override
 	public String toString() {
 		return "AdvertiseWebNekretnine [id=" + id + ", name=" + name + ", url=" + url + ", price=" + price + ", areas="
-				+ areas + ", ad_published=" + ad_published + ", title=" + title + ", description=" + description
-				+ ", address=" + address + ", floor=" + floor + ", num_of_rooms=" + num_of_rooms + ", city=" + city
-				+ ", state=" + state + ", street=" + street + ", price_per_m=" + price_per_m + ", active= " + active;
+				+ areas + ", ad_published=" + ad_published + ", ad_removed=" + ad_removed + ", title=" + title
+				+ ", description=" + description + ", address=" + address + ", full_address=" + full_address
+				+ ", floor=" + floor + ", num_of_rooms=" + num_of_rooms + ", city=" + city + ", state=" + state
+				+ ", street=" + street + ", price_per_m=" + price_per_m + ", image1=" + Arrays.toString(image1)
+				+ ", image2=" + Arrays.toString(image2) + ", type_of_ad=" + type_of_ad + ", date_of_inserting="
+				+ date_of_inserting + ", type_of_property=" + type_of_property + ", building_year=" + building_year
+				+ ", screenshot=" + Arrays.toString(screenshot) + ", lon=" + lon + ", lat=" + lat + ", active=" + active
+				+ "]";
 	}
+
+	
 
 }
