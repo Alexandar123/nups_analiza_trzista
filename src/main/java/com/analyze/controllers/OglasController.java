@@ -43,7 +43,10 @@ public class OglasController {
 	public OglasController(OglasiRepository oglasRepo) {
 		this.oglasRepo = oglasRepo;
 	}
-
+	@GetMapping("/test")
+	public String test() {
+		return "Hello World";
+	}
 	@GetMapping("/number")
 	public int getNumberOfOglas() {
 		return oglasRepo.getNumberOfOglasa();

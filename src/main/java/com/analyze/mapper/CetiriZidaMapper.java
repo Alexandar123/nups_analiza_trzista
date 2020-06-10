@@ -34,9 +34,9 @@ public class CetiriZidaMapper {
 	public CetiriZidaMapper(AdvertiseManagerRepo advertiseManagerRepo) {
 		this.advertiseManagerRepo = advertiseManagerRepo;
 	}
-
+//ID AD POSLEDNJI DODAT ZA 4zida 87184
 	public static void main(String[] args) {
-		String BASE = "C:\\Users\\agordic\\Desktop\\DataTrziste\\Podaci\\4zida\\4zida1.json";
+		String BASE = "C:\\Users\\agordic\\Desktop\\DataTrziste\\Podaci\\4zida\\4zida2.json";
 
 		Instant start = Instant.now();
 
@@ -111,7 +111,12 @@ public class CetiriZidaMapper {
 				
 				String num_of_rooms = rootNode.path("images").get(br).path("num_of_rooms").asText();
 				System.out.println(url);
-				numOfRoom =(Strings.isNullOrEmpty(num_of_rooms)) ? 0 : Integer.parseInt(num_of_rooms.substring(0, 1));
+				if(num_of_rooms.equalsIgnoreCase("Centralno")){
+					numOfRoom = 0;
+				}else {
+					numOfRoom =(Strings.isNullOrEmpty(num_of_rooms)) ? 0 : Integer.parseInt(num_of_rooms.substring(0, 1));
+
+				}
 
 				
 				String ad_published = rootNode.path("images").get(br).path("ad_published").asText();
@@ -135,8 +140,9 @@ public class CetiriZidaMapper {
 				}else {
 					priceInt = 0L;
 				}
-				
-				if (!Strings.isNullOrEmpty(price_per_m_string) && !price_per_m_string.equals("Uknjiženo")) {
+				if( price_per_m_string != null || Character.isDigit(price_per_m_string.charAt(0)) == false || price_per_m_string.equalsIgnoreCase("centralno") || price_per_m_string.equalsIgnoreCase("struja") || price_per_m_string.equalsIgnoreCase("Etažno")){
+					price_per_m = priceInt / areasInt;
+				}else if (!Strings.isNullOrEmpty(price_per_m_string) && !price_per_m_string.equals("Uknjiženo")) {
 					String tmp1 = price_per_m_string.replace(" €/m2", "");
 					String tmp = tmp1.replace(".", "");
 					price_per_m = Float.parseFloat(tmp);
@@ -152,14 +158,15 @@ public class CetiriZidaMapper {
 				}
 
 				if (description != null) {
-					if (image != null) {
+					if (!Strings.isNullOrEmpty(image)) {
 						 image11 = ImageDownloader.saveImage(image, "image_1_" + 1);
 					}
 
 					 screenshot = WebPageScreenShotTaker.screenShot(url);
 					// Exit from loop
 					br++;
-					if (!Strings.isNullOrEmpty(ad_published)) {
+					if (!Strings.isNullOrEmpty(ad_published) && Character.isDigit(ad_published.charAt(0)) == true) {
+						System.out.println("Datum: " + Character.isDigit(ad_published.charAt(0)) );
 						String dateSub = StringUtils.substring(ad_published, 0, 10);
 						SimpleDateFormat sdf1 = new SimpleDateFormat("dd.MM.YYYY");
 						java.util.Date date = sdf1.parse(dateSub);
