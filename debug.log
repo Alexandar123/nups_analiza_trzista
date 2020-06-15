@@ -419,3 +419,5 @@
 [0503/152513.571:ERROR:file_io.cc(134)] WriteFile: The pipe is being closed. (0xE8)
 [0506/045008.817:ERROR:process_info.cc(359)] UncheckedAllocate
 [0506/045028.482:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\agordic\AppData\Local\Temp\scoped_dir123032_481001596\Crashpad\reports\ddbdb00e-273d-4a8b-a584-9ca4af6a9788.dmp: The process cannot access the file because it is being used by another process. (0x20)
+[0611/222019.314:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\agordic\AppData\Local\Temp\scoped_dir124596_1975110904\Crashpad\reports\21582f8c-0ad9-4c6a-a639-85ad67c4ec71.dmp: The process cannot access the file because it is being used by another process. (0x20)
+[0615/043447.169:ERROR:process_info.cc(359)] UncheckedAllocate

@@ -165,7 +165,7 @@ public class CetiriZidaMapper {
 					 screenshot = WebPageScreenShotTaker.screenShot(url);
 					// Exit from loop
 					br++;
-					if (!Strings.isNullOrEmpty(ad_published) && Character.isDigit(ad_published.charAt(0)) == true) {
+					if (!Strings.isNullOrEmpty(ad_published) && Character.isDigit(ad_published.charAt(0)) == true && ad_published.length()>4) {
 						System.out.println("Datum: " + Character.isDigit(ad_published.charAt(0)) );
 						String dateSub = StringUtils.substring(ad_published, 0, 10);
 						SimpleDateFormat sdf1 = new SimpleDateFormat("dd.MM.YYYY");
