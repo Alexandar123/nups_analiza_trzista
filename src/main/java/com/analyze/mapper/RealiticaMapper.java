@@ -87,8 +87,9 @@ public class RealiticaMapper {
 			int br2 = 0;
 			while (rootNode.elements().hasNext() && br < lang.size()) {
 				String url = rootNode.path("images").get(br).path("url_url").asText();
-				if(!ads.adAlreadyExistInDB("https://www.realitica.com/hr/listing/2266977")) {
-					System.out.println("OGLAS NE POSTOJI");
+				
+				//if(!ads.adAlreadyExistInDB("https://www.realitica.com/hr/listing/2266977")) {
+				//	System.out.println("OGLAS NE POSTOJI");
 					
 					
 				String price = rootNode.path("images").get(br).path("price").asText();//
