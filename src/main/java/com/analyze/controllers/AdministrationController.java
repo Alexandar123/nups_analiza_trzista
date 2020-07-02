@@ -43,7 +43,7 @@ public class AdministrationController {
 			Long id_ad = Long.parseLong(String.valueOf(obj[0]));
 			String name = String.valueOf(obj[1]);
 			String url = String.valueOf(obj[2]);
-			Long price = Long.parseLong(String.valueOf(3));
+			Long price = Long.parseLong(String.valueOf(obj[3]));
 			int areas = Integer.parseInt(String.valueOf(obj[4]));
 			java.sql.Date toD = java.sql.Date.valueOf(String.valueOf(obj[5]));
 			java.sql.Date fromD = java.sql.Date.valueOf(String.valueOf(obj[6]));

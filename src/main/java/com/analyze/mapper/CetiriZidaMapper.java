@@ -35,8 +35,9 @@ public class CetiriZidaMapper {
 		this.advertiseManagerRepo = advertiseManagerRepo;
 	}
 //ID AD POSLEDNJI DODAT ZA 4zida 87184
+//ID AD POSLEDNJI DODAT ZA 4zida 93071
 	public static void main(String[] args) {
-		String BASE = "C:\\Users\\agordic\\Desktop\\DataTrziste\\Podaci\\4zida\\4zida2.json";
+		String BASE = "C:\\Users\\agordic\\Desktop\\DataTrziste\\Podaci\\4zida\\4zida3.json";
 
 		Instant start = Instant.now();
 

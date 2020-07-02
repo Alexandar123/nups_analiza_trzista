@@ -48,7 +48,7 @@ public class UserController {
 
 	@RequestMapping(value = "/points/increase/{id}", method = RequestMethod.POST)
 	public int increasePoints(@RequestBody int points, @PathVariable("id") Long id) {
-		log.info("Kontorler: " + points);
+		log.info("Poena: " + points);
 		log.info("USERID: " + id);
 		return userRepository.increasePoints(points, id);
 	}

@@ -22,7 +22,9 @@ import org.springframework.stereotype.Service;
 
 import com.analyze.WebPageScreenShotTaker;
 import com.analyze.controllers.AddScreenShotToAdController;
+import com.analyze.controllers.OglasController;
 import com.analyze.database.InsertRecordInDatabaseWithJdbcTemplate;
+import com.analyze.helper.AdsHelperWithDB;
 import com.analyze.model.AdvertiseWebNekretnine;
 import com.analyze.repositories.AdvertiseManagerRepo;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -32,9 +34,9 @@ import com.google.common.base.Strings;
 @Service
 public class RealiticaMapper {
 	
-
+//POSLEDNJI ID IZ BAZE 96504
 	public static void main(String[] args) {
-		String BASE = "C:\\Users\\agordic\\Desktop\\DataTrziste\\Podaci\\realitica\\realitica_najam_5_4_2020.json";
+		String BASE = "C:\\Users\\agordic\\Desktop\\DataTrziste\\Podaci\\realitica\\realitica_rent_7_1_2020_2.json";
 		String EXTENSION = ".json";
 
 		Instant start = Instant.now();
@@ -84,10 +86,14 @@ public class RealiticaMapper {
 			int br1 = 0;
 			int br2 = 0;
 			while (rootNode.elements().hasNext() && br < lang.size()) {
-
+				String url = rootNode.path("images").get(br).path("url_url").asText();
+				if(!ads.adAlreadyExistInDB("https://www.realitica.com/hr/listing/2266977")) {
+					System.out.println("OGLAS NE POSTOJI");
+					
+					
 				String price = rootNode.path("images").get(br).path("price").asText();//
 				String name = rootNode.path("images").get(br).path("name").asText();//
-				String url = rootNode.path("images").get(br).path("url_url").asText();
+				
 				String type = rootNode.path("images").get(br).path("type").asText();
 				String areas = rootNode.path("images").get(br).path("areas").asText();
 				String ad_published = rootNode.path("images").get(br).path("last_changes").asText();
@@ -101,7 +107,7 @@ public class RealiticaMapper {
 				
 				String location = rootNode.path("images").get(br).path("location").asText();
 				street = address + " " + location;
-				fullAddress = city + " " + address + " " + location;
+				fullAddress = state + " " + city + " " + address + " " + location;
 				num_of_roomsString = rootNode.path("images").get(br).path("num_of_room").asText();
 				
 				String description = rootNode.path("images").get(br).path("details").asText();
@@ -129,7 +135,7 @@ public class RealiticaMapper {
 				
 				if (description != null) {
 
-					if(type.contains("Prodajem Stan-Apartman") || type.contains("Stan") || type.contains("Apartman") 
+					if(type.contains("Prodajem Stan-Apartman") || type.contains("Stan") || type.contains("stan") || type.contains("iznajmljuje sobu") || type.contains("Apartman") 
 							|| type.contains("Apartment") || type.contains("garsonjera") || type.contains("Garsonjera") || type.contains("Stan-Apartman")) {
 						type_of_property = "apartment";
 					}else if(type.contains("Prodajem Zemljište") || type.contains("Prodajem Građevinsko Zemljište") ||
@@ -139,7 +145,7 @@ public class RealiticaMapper {
 							|| type.contains("Kuća") || type.contains("kucu") || type.contains("kuću") || type.contains("Kuće")) {
 						type_of_property = "house";
 					}else if(type.contains("Prodajem Poslovni Prostor") || type.contains("Hotel")|| type.contains("poslovni")
-							|| type.contains("Poslovni Prostor")) {
+							|| type.contains("Poslovni Prostor") || type.contains("poslovni prostor")) {
 						type_of_property = "business place";
 					}
 				
@@ -277,17 +283,20 @@ public class RealiticaMapper {
 					}
 					
 					AdvertiseWebNekretnine adv = new AdvertiseWebNekretnine(name, url, priceInt, areasInt, date1,
-							title, description, address, fullAddress, floorInt, numOfRoom, city, state,
+							title, description, address, fullAddress, floorInt, numOfRoom, city.toLowerCase(), state.toUpperCase(),
 							street, price_per_m, image11, image22, type_of_ad, type_of_property, building_year,screenshot);
 
 					ls.add(adv);
 					//advertiseManagerRepo.save(adv);
-					 InsertRecordInDatabaseWithJdbcTemplate.saveRecord(adv);
+					 //InsertRecordInDatabaseWithJdbcTemplate.saveRecord(adv);
 					
 					// System.out.println("Broj: " + br);
 					//System.out.println("Broj koji nemaju datum: " + br1);
 					//System.out.println("Broj koji nemaju areas: " + br2);
 				}
+			}else {
+				System.out.println("OGLAS POSTOJI");
+			}
 			}
 		} catch (IOException | org.json.simple.parser.ParseException e) {
 			System.out.println("Greska: ");

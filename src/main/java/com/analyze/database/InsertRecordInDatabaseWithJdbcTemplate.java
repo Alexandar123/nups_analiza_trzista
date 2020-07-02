@@ -29,6 +29,7 @@ public class InsertRecordInDatabaseWithJdbcTemplate{
 					" price, " +
 					" areas, " +
 					" ad_published, " +
+					" ad_removed, " +
 					" title, " +
 					
 					" description, " +
@@ -47,7 +48,7 @@ public class InsertRecordInDatabaseWithJdbcTemplate{
 					" building_year, " +
 					" screenshot) " +
 
-					"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	
 	
 
@@ -117,13 +118,13 @@ public class InsertRecordInDatabaseWithJdbcTemplate{
 		JdbcTemplate template = new JdbcTemplate(dataSource);
 
 		// define query arguments
-		Object[] params = new Object[] { adv.getName(), adv.getUrl(), adv.getPrice(), adv.getAreas(), adv.getAd_published(), adv.getTitle(), adv.getDescription(),
+		Object[] params = new Object[] { adv.getName(), adv.getUrl(), adv.getPrice(), adv.getAreas(), adv.getAd_published(), adv.getAd_removed(), adv.getTitle(), adv.getDescription(),
 				adv.getAddress(), adv.getFull_address(), adv.getFloor(), adv.getNum_of_rooms(), adv.getCity(), adv.getState(),
 				adv.getStreet(), adv.getPrice_per_m(), adv.getImage1(), adv.getImage2(), adv.getType_of_ad(), adv.getType_of_property(), adv.getBuilding_yer()
 				,adv.getScreenshot()};
 
 		// define SQL types of the arguments
-		int[] types = new int[] { Types.VARCHAR, Types.VARCHAR, Types.INTEGER, Types.INTEGER, Types.DATE, Types.VARCHAR,
+		int[] types = new int[] { Types.VARCHAR, Types.VARCHAR, Types.INTEGER, Types.INTEGER, Types.DATE,Types.DATE, Types.VARCHAR,
 				Types.VARCHAR, Types.VARCHAR,Types.VARCHAR,Types.VARCHAR, Types.DECIMAL, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR,
 				Types.DECIMAL, Types.BLOB, Types.BLOB, Types.VARCHAR, Types.VARCHAR, Types.INTEGER, Types.BLOB };
 

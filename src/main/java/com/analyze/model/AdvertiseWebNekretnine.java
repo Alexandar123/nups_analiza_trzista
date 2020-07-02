@@ -1,6 +1,7 @@
 package com.analyze.model;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import javax.persistence.Column;
@@ -115,7 +116,13 @@ public class AdvertiseWebNekretnine {
 		this.price = price;
 		this.areas = areas;
 		this.ad_published = ad_published;
-		this.ad_removed = ad_removed;
+		if(ad_removed== null ) {
+			SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+			Date date = new Date(System.currentTimeMillis());
+			this.ad_removed = date;
+		}else {
+			this.ad_removed = ad_removed;
+		}
 		this.title = title;
 		this.description = description;
 		this.address = address;
@@ -161,6 +168,11 @@ public class AdvertiseWebNekretnine {
 		this.type_of_property = type_of_property;
 		this.building_year = building_yer;
 		this.screenshot = screenshot;
+		if(ad_removed == null ) {
+			SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+			Date date = new Date(System.currentTimeMillis());
+			this.ad_removed = date;
+		}
 
 	}
 

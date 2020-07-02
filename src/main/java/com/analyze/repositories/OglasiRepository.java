@@ -69,5 +69,9 @@ public interface OglasiRepository extends CrudRepository<AdvertiseWebNekretnine,
 	@Query(value = "SELECT t.id_ad, t.url,t.full_address, t.price_per_m, t.ad_published, t.price, t.areas, t.type_of_ad, t.type_of_property, t.lat, t.lon, t.active FROM test_data5_no_image t WHERE id_ad IN ?1", nativeQuery = true)
 	List<Object> getAllIdsForTable(List<Long> ids);
 	
+	@Modifying
+	@Query(value = "SELECT count(*) from test_data5_no_image WHERE url = ?1", nativeQuery = true)
+	int findAdByUrl(String url);
+	
 }
 

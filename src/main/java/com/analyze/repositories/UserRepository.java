@@ -21,7 +21,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	
 	@Transactional
 	@Modifying
-	@Query(value = "UPDATE users SET points = points + ?1 WHERE id = ?2", nativeQuery = true )
+	@Query(value = "UPDATE users SET points = points + ?1, coins_expiration = DATE_ADD(CURDATE(), INTERVAL 1 YEAR) WHERE id = ?2", nativeQuery = true )
 	int increasePoints(int points, Long id);
 
 	@Transactional

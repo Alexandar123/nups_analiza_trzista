@@ -1,6 +1,5 @@
 package com.analyze.controllers;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,10 +42,12 @@ public class OglasController {
 	public OglasController(OglasiRepository oglasRepo) {
 		this.oglasRepo = oglasRepo;
 	}
+
 	@GetMapping("/test")
 	public String test() {
 		return "Hello World";
 	}
+
 	@GetMapping("/number")
 	public int getNumberOfOglas() {
 		return oglasRepo.getNumberOfOglasa();
@@ -71,12 +72,12 @@ public class OglasController {
 	}
 
 	@GetMapping("/countByParams/{date_from}/{date_to}")
-	public int countOfCityByParams(
-			@PathVariable("date_from") String from, @PathVariable("date_to") String to) {
+	public int countOfCityByParams(@PathVariable("date_from") String from, @PathVariable("date_to") String to) {
 
 		java.sql.Date toD = java.sql.Date.valueOf(to);
 		java.sql.Date fromD = java.sql.Date.valueOf(from);
-		if(fromD.after(toD)) return -1;
+		if (fromD.after(toD))
+			return -1;
 		return oglasRepo.countOfCityByParams(fromD, toD);
 	}
 
@@ -89,11 +90,12 @@ public class OglasController {
 		List<AdsData> ads = new ArrayList<AdsData>();
 		java.sql.Date toD = java.sql.Date.valueOf(to);
 		java.sql.Date fromD = java.sql.Date.valueOf(from);
-		if(fromD.after(toD)) return null;
-		
+		if (fromD.after(toD))
+			return null;
+
 		Iterable<Object> listO = oglasRepo.getAllAdByAllParamsForMapNoAreas(state.toUpperCase(), city.toLowerCase(),
 				type_of_property.toLowerCase(), type_of_ad.toLowerCase(), fromD, toD);
-		
+
 		Iterator itr = listO.iterator();
 		while (itr.hasNext()) {
 			Object[] obj = (Object[]) itr.next();
@@ -105,10 +107,10 @@ public class OglasController {
 			double lat = Double.parseDouble(String.valueOf(obj[5]));
 			double lon = Double.parseDouble(String.valueOf(obj[6]));
 
-			AdsData tmp = new AdsData(id_ad, price_per_m,areas,type_of_ad1, type_of_property1,lat,lon);
+			AdsData tmp = new AdsData(id_ad, price_per_m, areas, type_of_ad1, type_of_property1, lat, lon);
 			ads.add(tmp);
 		}
-		
+
 		return ads;
 	}
 
@@ -122,14 +124,15 @@ public class OglasController {
 		log.info("Request sa areas");
 
 		List<AdsData> ads = new ArrayList<AdsData>();
-		
+
 		java.sql.Date toD = java.sql.Date.valueOf(to);
 		java.sql.Date fromD = java.sql.Date.valueOf(from);
-		if(fromD.after(toD)) return null;
-		
-		Iterable<Object> listO = oglasRepo.getAllAdByAllParamsForMap(state.toUpperCase(), city.toLowerCase(), areasMin, areasMax,
-				type_of_property.toLowerCase(), type_of_ad.toLowerCase(), fromD, toD);
-		
+		if (fromD.after(toD))
+			return null;
+
+		Iterable<Object> listO = oglasRepo.getAllAdByAllParamsForMap(state.toUpperCase(), city.toLowerCase(), areasMin,
+				areasMax, type_of_property.toLowerCase(), type_of_ad.toLowerCase(), fromD, toD);
+
 		Iterator itr = listO.iterator();
 		while (itr.hasNext()) {
 			Object[] obj = (Object[]) itr.next();
@@ -141,10 +144,10 @@ public class OglasController {
 			double lat = Double.parseDouble(String.valueOf(obj[5]));
 			double lon = Double.parseDouble(String.valueOf(obj[6]));
 
-			AdsData tmp = new AdsData(id_ad, price_per_m,areas,type_of_ad1, type_of_property1,lat,lon);
+			AdsData tmp = new AdsData(id_ad, price_per_m, areas, type_of_ad1, type_of_property1, lat, lon);
 			ads.add(tmp);
 		}
-		
+
 		return ads;
 	}
 
@@ -184,14 +187,14 @@ public class OglasController {
 	public List<Object[]> getByCity(@PathVariable("city") String city) {
 		return oglasRepo.getLatLonAdsByCity(city);
 	}
-	
+
 	@Produces({ MediaType.APPLICATION_JSON })
 	@RequestMapping(value = "/get/{type_of_property}/{type_of_ad}", method = RequestMethod.GET)
 	public Map<String, HashMap<Integer, Float>> graphAverageByTypeOfProperty(
 			@PathVariable("type_of_property") String type_of_property, @PathVariable("type_of_ad") String type_of_ad) {
 		List<Object> house = oglasRepo.getAllAdsByTypeOfPropert(type_of_property, type_of_ad);
 		List<AdvForMainGraphs> advs = new ArrayList<AdvForMainGraphs>();
-		
+
 		Iterator itr = house.iterator();
 		while (itr.hasNext()) {
 			Object[] obj = (Object[]) itr.next();
@@ -200,9 +203,9 @@ public class OglasController {
 			Long price = Long.parseLong(String.valueOf(obj[2]));
 			java.sql.Date ad_published = null;
 			try {
-				SimpleDateFormat sdf1  = new SimpleDateFormat("yyyy-MM-dd");
+				SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
 				java.util.Date date = sdf1.parse(String.valueOf(obj[3]));
-				ad_published = new java.sql.Date(date.getTime()); 
+				ad_published = new java.sql.Date(date.getTime());
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
@@ -306,7 +309,7 @@ public class OglasController {
 	}
 
 	@PostMapping("/table")
-	public List<TableAds> getAllAdsByIds(@RequestBody List<Long> ids){
+	public List<TableAds> getAllAdsByIds(@RequestBody List<Long> ids) {
 		List<Object> listO = oglasRepo.getAllIdsForTable(ids);
 		List<TableAds> listT = new ArrayList<>();
 		Iterator itr = listO.iterator();
@@ -330,11 +333,11 @@ public class OglasController {
 			double lon = Double.parseDouble(String.valueOf(obj[10]));
 			int active = Integer.parseInt(String.valueOf(obj[11]));
 
-			TableAds tmp = new TableAds(id_ad, url,full_address,price_per_m,ad_published,price,areas,
-					type_of_ad, type_of_property,lat,lon,active);
+			TableAds tmp = new TableAds(id_ad, url, full_address, price_per_m, ad_published, price, areas, type_of_ad,
+					type_of_property, lat, lon, active);
 			listT.add(tmp);
 		}
 		return listT;
 	}
-
+	
 }
