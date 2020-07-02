@@ -24,7 +24,6 @@ import com.analyze.WebPageScreenShotTaker;
 import com.analyze.controllers.AddScreenShotToAdController;
 import com.analyze.controllers.OglasController;
 import com.analyze.database.InsertRecordInDatabaseWithJdbcTemplate;
-import com.analyze.helper.AdsHelperWithDB;
 import com.analyze.model.AdvertiseWebNekretnine;
 import com.analyze.repositories.AdvertiseManagerRepo;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -87,8 +86,7 @@ public class RealiticaMapper {
 			int br2 = 0;
 			while (rootNode.elements().hasNext() && br < lang.size()) {
 				String url = rootNode.path("images").get(br).path("url_url").asText();
-				
-				//if(!ads.adAlreadyExistInDB("https://www.realitica.com/hr/listing/2266977")) {
+				//if(!AdsHelperWithDB.adAlreadyExistInDB(url)) {
 				//	System.out.println("OGLAS NE POSTOJI");
 					
 					
@@ -289,12 +287,12 @@ public class RealiticaMapper {
 
 					ls.add(adv);
 					//advertiseManagerRepo.save(adv);
-					 //InsertRecordInDatabaseWithJdbcTemplate.saveRecord(adv);
+					 InsertRecordInDatabaseWithJdbcTemplate.saveRecord(adv);
 					
 					// System.out.println("Broj: " + br);
 					//System.out.println("Broj koji nemaju datum: " + br1);
 					//System.out.println("Broj koji nemaju areas: " + br2);
-				}
+				//}
 			}else {
 				System.out.println("OGLAS POSTOJI");
 			}
